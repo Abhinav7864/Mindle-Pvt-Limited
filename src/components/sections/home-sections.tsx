@@ -1,32 +1,9 @@
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { Marquee } from "@/components/ui/marquee";
 import { RevealGroup } from "@/components/ui/reveal";
 import { MotionItem } from "@/components/sections/motion-item";
-import { personas, testimonials, logos, companyStats } from "@/lib/data/company";
-
-export function LogoStrip() {
-  return (
-    <section className="border-y border-border py-10">
-      <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
-        <p className="mb-7 text-center text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          Trusted by ambitious teams
-        </p>
-        <Marquee>
-          {logos.map((name) => (
-            <span
-              key={name}
-              className="font-display text-lg font-bold tracking-tight text-muted-foreground/60"
-            >
-              {name}
-            </span>
-          ))}
-        </Marquee>
-      </div>
-    </section>
-  );
-}
+import { personas, testimonials, companyStats } from "@/lib/data/company";
 
 export function Metrics() {
   return (

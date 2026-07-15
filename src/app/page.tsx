@@ -2,7 +2,6 @@ import { Hero } from "@/components/sections/hero";
 import { ProductsShowcase } from "@/components/sections/products-showcase";
 import { ServicesStrip } from "@/components/sections/services-strip";
 import {
-  LogoStrip,
   Metrics,
   Personas,
   Testimonials,
@@ -13,7 +12,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <LogoStrip />
       <ProductsShowcase />
       <ServicesStrip />
       <Metrics />

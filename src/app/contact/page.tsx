@@ -15,7 +15,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Mindle — product inquiries, services, careers, and partnerships.",
+    "Get in touch with Mindle — product inquiries, services, and partnerships.",
 };
 
 const socials = [
@@ -35,7 +35,7 @@ export default function ContactPage() {
             Let&apos;s <span className="text-gradient">talk</span>
           </>
         }
-        description="Product questions, project ideas, roles, partnerships — we read everything and reply fast."
+        description="Product questions, project ideas, partnerships — we read everything and reply fast."
       />
 
       <section className="py-20 md:py-24">

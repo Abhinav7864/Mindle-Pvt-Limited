@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 const topics = [
   "Product inquiry",
   "Build with Mindle (services)",
-  "Careers",
   "Partnership",
   "Press",
   "Other",
@@ -19,25 +18,20 @@ export function ContactForm() {
   const params = useSearchParams();
   const [sent, setSent] = React.useState(false);
 
-  // Prefill context from ?product= / ?service= / ?role=
+  // Prefill context from ?product= / ?service=
   const product = params.get("product");
   const service = params.get("service");
-  const role = params.get("role");
   const prefill = product
     ? `I'm interested in ${product.charAt(0).toUpperCase() + product.slice(1)}.`
     : service
       ? `I'd like to talk about a ${service.replace(/-/g, " ")} project.`
-      : role
-        ? `I'd like to apply for the ${role.replace(/-/g, " ")} role.`
-        : "";
+      : "";
 
   const defaultTopic = product
     ? "Product inquiry"
     : service
       ? "Build with Mindle (services)"
-      : role
-        ? "Careers"
-        : topics[0];
+      : topics[0];
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();

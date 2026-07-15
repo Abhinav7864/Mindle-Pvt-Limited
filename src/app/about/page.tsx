@@ -142,14 +142,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <FinalCTA
-        title="Want to build the future with us?"
-        description="We're hiring across engineering, design, and growth."
-        primaryLabel="See open roles"
-        primaryHref="/careers"
-        secondaryLabel="Get in touch"
-        secondaryHref="/contact"
-      />
+      <FinalCTA />
     </>
   );
 }

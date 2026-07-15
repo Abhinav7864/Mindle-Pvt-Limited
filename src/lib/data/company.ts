@@ -55,13 +55,3 @@ export const testimonials: { quote: string; name: string; title: string; initial
   { quote: "They think about trust and edge cases the way we wish every vendor did.", name: "Priya S.", title: "Engineering Lead", initials: "PS" },
   { quote: "GitaConnect is genuinely delightful — the haptics and the mentor feel magical.", name: "Rohan K.", title: "Beta user", initials: "RK" },
 ];
-
-export const logos = [
-  "Northwind",
-  "Lumen Labs",
-  "Vertex",
-  "Basecraft",
-  "Halcyon",
-  "Meridian",
-  "Cobalt",
-];

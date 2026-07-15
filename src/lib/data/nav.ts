@@ -13,7 +13,6 @@ export const mainNav: NavLink[] = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Careers", href: "/careers" },
 ];
 
 /** Mega-menu columns for Products. */
@@ -64,7 +63,6 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Careers", href: "/careers" },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
     ],

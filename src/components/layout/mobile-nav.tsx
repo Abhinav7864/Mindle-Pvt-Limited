@@ -14,8 +14,12 @@ import { mainNav, productMenu } from "@/lib/data/nav";
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = React.useState(pathname);
 
-  React.useEffect(() => setOpen(false), [pathname]);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+  }
 
   React.useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";

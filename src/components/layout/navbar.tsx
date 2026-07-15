@@ -25,7 +25,12 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  React.useEffect(() => setOpenMenu(null), [pathname]);
+  const [prevPathname, setPrevPathname] = React.useState(pathname);
+
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setOpenMenu(null);
+  }
 
   return (
     <header
