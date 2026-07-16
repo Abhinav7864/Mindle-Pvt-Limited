@@ -117,19 +117,27 @@ export default function AboutPage() {
             title="The people behind Mindle"
             description="A small, senior team of builders — inventors on the GitaConnect patent and owners of everything we ship."
           />
-          <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m) => (
               <MotionItem key={m.name}>
                 <div className="h-full rounded-2xl border border-border bg-card p-6 text-center transition-colors hover:border-primary/35">
-                  <span
-                    className="mx-auto grid h-20 w-20 place-items-center rounded-full text-xl font-bold text-white shadow-lg"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, ${m.gradient[0]}, ${m.gradient[1]})`,
-                    }}
-                    aria-hidden="true"
-                  >
-                    {m.initials}
-                  </span>
+                  {m.image ? (
+                    <img
+                      src={m.image}
+                      alt={m.name}
+                      className="mx-auto h-32 w-32 rounded-full object-cover shadow-lg border border-border"
+                    />
+                  ) : (
+                    <span
+                      className="mx-auto grid h-32 w-32 place-items-center rounded-full text-2xl font-bold text-white shadow-lg"
+                      style={{
+                        backgroundImage: `linear-gradient(135deg, ${m.gradient[0]}, ${m.gradient[1]})`,
+                      }}
+                      aria-hidden="true"
+                    >
+                      {m.initials}
+                    </span>
+                  )}
                   <h3 className="mt-4 font-display text-base font-bold">{m.name}</h3>
                   <p className="mt-0.5 text-sm font-medium text-primary">{m.role}</p>
                   <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">

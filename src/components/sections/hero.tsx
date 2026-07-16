@@ -105,27 +105,6 @@ export function Hero() {
           <div className="animate-[float_6s_ease-in-out_infinite]">
             <PhoneMockup className="glow-primary" />
           </div>
-          {/* Floating chips */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-            className="glass absolute -right-24 top-16 rounded-2xl border border-border px-4 py-3 shadow-xl"
-          >
-            <p className="text-xs font-semibold">Anti-hallucination AI</p>
-            <p className="text-[11px] text-muted-foreground">
-              Verified against 700 verses
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.05, duration: 0.6 }}
-            className="glass absolute -left-20 bottom-24 rounded-2xl border border-border px-4 py-3 shadow-xl"
-          >
-            <p className="text-xs font-semibold">11 languages</p>
-            <p className="text-[11px] text-muted-foreground">Language-locked replies</p>
-          </motion.div>
         </motion.div>
       </div>
     </section>
