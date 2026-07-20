@@ -9,11 +9,6 @@ import {
   BarChart3,
   CloudOff,
   Languages,
-  ShieldCheck,
-  PenLine,
-  Activity,
-  Headphones,
-  Workflow,
 } from "lucide-react";
 
 export type ProductStatus = "live" | "beta" | "coming-soon";
@@ -177,126 +172,6 @@ export const products: Product[] = [
       },
     ],
     cta: { label: "Join the GitaConnect beta", href: "/contact?product=gitaconnect" },
-  },
-
-  {
-    slug: "nova",
-    name: "Nova",
-    tagline: "An AI writing copilot that thinks in your brand voice",
-    category: "AI · Productivity",
-    platform: "Web",
-    status: "coming-soon",
-    featured: false,
-    gradient: ["#2563eb", "#06b6d4"],
-    short:
-      "A context-aware AI writing workspace that drafts, edits, and researches while staying perfectly on-brand.",
-    description:
-      "Nova is a collaborative writing surface where an AI copilot learns your tone, cites its sources, and turns rough notes into publish-ready content — from landing pages to long-form essays.",
-    hero: {
-      headline: "Write at the speed of thought, on-brand every time.",
-      subhead:
-        "Nova pairs a fast, distraction-free editor with an AI copilot that knows your voice, your facts, and your goals.",
-    },
-    highlights: [
-      "Brand-voice modelling",
-      "Cited, grounded suggestions",
-      "Real-time collaboration",
-      "One-click repurposing",
-    ],
-    features: [
-      { icon: PenLine, title: "Voice-matched drafting", description: "Nova learns from your existing content to write in a tone that's unmistakably yours." },
-      { icon: ShieldCheck, title: "Grounded & cited", description: "Every claim can be traced to a source, keeping your writing trustworthy." },
-      { icon: Workflow, title: "Repurpose in a click", description: "Turn one long-form piece into threads, emails, and posts instantly." },
-    ],
-    screenshots: [
-      { title: "The Nova editor", caption: "A calm, focused writing canvas with an always-ready copilot." },
-      { title: "Voice profiles", caption: "Save and switch between brand voices per project." },
-    ],
-    faq: [
-      { q: "When does Nova launch?", a: "Nova is in active development. Join the waitlist to help shape the beta." },
-      { q: "Will there be an API?", a: "Yes — a developer API is planned so you can bring Nova into your own tools." },
-    ],
-    cta: { label: "Join the Nova waitlist", href: "/contact?product=nova" },
-  },
-
-  {
-    slug: "pulse",
-    name: "Pulse",
-    tagline: "Product analytics indie makers actually enjoy using",
-    category: "SaaS · Analytics",
-    platform: "Web",
-    status: "coming-soon",
-    featured: false,
-    gradient: ["#7c3aed", "#ec4899"],
-    short:
-      "Lightweight, privacy-first product analytics with AI-generated insights — set up in minutes, no data team required.",
-    description:
-      "Pulse gives small teams the signal without the noise: clean event tracking, funnels, and an AI analyst that surfaces what changed and why — all privacy-first by default.",
-    hero: {
-      headline: "Know what your users do — without a data team.",
-      subhead:
-        "Pulse turns raw events into plain-English insights, so you can ship the next right thing with confidence.",
-    },
-    highlights: [
-      "5-minute setup",
-      "AI-written insight digests",
-      "Privacy-first by design",
-      "Funnels & retention out of the box",
-    ],
-    features: [
-      { icon: Activity, title: "Live product signal", description: "Real-time events, funnels, and retention without configuration overhead." },
-      { icon: Sparkles, title: "AI analyst", description: "Weekly plain-English digests that explain what moved and why." },
-      { icon: ShieldCheck, title: "Privacy-first", description: "Cookieless, GDPR-friendly tracking that respects your users." },
-    ],
-    screenshots: [
-      { title: "Insight digest", caption: "Your week in product, written for humans." },
-      { title: "Funnels", caption: "Spot drop-off at a glance." },
-    ],
-    faq: [
-      { q: "Is Pulse privacy-compliant?", a: "Yes — Pulse is built cookieless and privacy-first, designed to be GDPR-friendly out of the box." },
-      { q: "When can I try it?", a: "Pulse is coming soon. Join the waitlist for early access." },
-    ],
-    cta: { label: "Join the Pulse waitlist", href: "/contact?product=pulse" },
-  },
-
-  {
-    slug: "loop",
-    name: "Loop",
-    tagline: "An AI support agent that resolves, not deflects",
-    category: "AI · Support",
-    platform: "Web",
-    status: "coming-soon",
-    featured: false,
-    gradient: ["#16a34a", "#2563eb"],
-    short:
-      "An AI customer-support agent that reads your docs, takes real actions, and hands off gracefully to humans.",
-    description:
-      "Loop connects to your knowledge base and tools to actually resolve tickets — issuing refunds, updating records, and escalating with full context when a human is needed.",
-    hero: {
-      headline: "Support that resolves issues, day or night.",
-      subhead:
-        "Loop reads your docs, acts through your tools, and hands off to your team with complete context — never a dead end.",
-    },
-    highlights: [
-      "Grounded in your knowledge base",
-      "Takes real actions via tools",
-      "Context-rich human handoff",
-      "Multilingual by default",
-    ],
-    features: [
-      { icon: Headphones, title: "Resolves, not deflects", description: "Loop completes real tasks instead of just linking to articles." },
-      { icon: Workflow, title: "Tool-connected", description: "Securely acts through your existing stack — billing, CRM, and more." },
-      { icon: MessagesSquare, title: "Graceful handoff", description: "Escalates to humans with a full summary and suggested next steps." },
-    ],
-    screenshots: [
-      { title: "Resolution view", caption: "Watch Loop take real actions to close a ticket." },
-      { title: "Handoff summary", caption: "Humans get full context in one glance." },
-    ],
-    faq: [
-      { q: "Which channels will Loop support?", a: "Web chat, email, and popular helpdesks are on the roadmap for launch." },
-      { q: "How do I get early access?", a: "Loop is coming soon — join the waitlist to be first in line." },
-    ],
-    cta: { label: "Join the Loop waitlist", href: "/contact?product=loop" },
   },
 ];
 

@@ -38,54 +38,6 @@ export const caseStudies: CaseStudy[] = [
       { title: "Jaap counter", caption: "Haptic biofeedback per repetition." },
     ],
   },
-  {
-    slug: "northwind-ai-search",
-    title: "Northwind: cutting support volume 40% with grounded AI search",
-    client: "Northwind (B2B SaaS)",
-    category: "AI · SaaS",
-    gradient: ["#2563eb", "#06b6d4"],
-    summary:
-      "A retrieval-augmented answer engine that reads Northwind's docs and resolves customer questions with cited sources.",
-    problem:
-      "Northwind's support team was overwhelmed by repetitive questions already answered in their documentation, while customers struggled to find answers through traditional keyword search.",
-    solution:
-      "We built a RAG pipeline with a grounded answer engine and citation UI, embedded across their help center and in-app. Guardrails ensured answers were traceable to source documents, with graceful escalation to human agents.",
-    technologies: ["Next.js", "Python", "Vector DB", "OpenAI", "PostgreSQL"],
-    results: [
-      { label: "Support tickets", value: "-40%" },
-      { label: "Time to answer", value: "-72%" },
-      { label: "Deflection rate", value: "61%" },
-      { label: "CSAT", value: "+18pts" },
-    ],
-    screenshots: [
-      { title: "Answer engine", caption: "Cited, grounded responses in the help center." },
-      { title: "Analytics", caption: "Deflection and satisfaction over time." },
-    ],
-  },
-  {
-    slug: "vertex-platform",
-    title: "Vertex: from prototype to scalable multi-tenant SaaS",
-    client: "Vertex (early-stage startup)",
-    category: "SaaS · Cloud",
-    gradient: ["#7c3aed", "#ec4899"],
-    summary:
-      "Rebuilding a fragile MVP into a production-grade, multi-tenant platform ready for its first enterprise customers.",
-    problem:
-      "Vertex had product-market fit but an MVP that couldn't scale — no multi-tenancy, brittle auth, and no billing. Enterprise deals were stalling on security and reliability concerns.",
-    solution:
-      "We re-architected the platform around clean multi-tenant boundaries, role-based access, Stripe billing, and an observable, CI/CD-driven cloud setup — without pausing feature delivery.",
-    technologies: ["Next.js", "PostgreSQL", "Stripe", "Terraform", "AWS", "GitHub Actions"],
-    results: [
-      { label: "Uptime", value: "99.9%" },
-      { label: "Enterprise deals", value: "+3" },
-      { label: "Deploy frequency", value: "10x" },
-      { label: "Onboarding time", value: "-65%" },
-    ],
-    screenshots: [
-      { title: "Admin console", caption: "Multi-tenant management and roles." },
-      { title: "Billing", caption: "Self-serve subscriptions with Stripe." },
-    ],
-  },
 ];
 
 export function getCaseStudy(slug: string) {

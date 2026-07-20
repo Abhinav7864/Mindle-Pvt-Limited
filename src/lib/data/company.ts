@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 export const companyStats = [
-  { label: "Products in flight", value: 4, suffix: "" },
+  { label: "Products in flight", value: 1, suffix: "" },
   { label: "Patent filings", value: 1, suffix: "" },
   { label: "Languages supported", value: 11, suffix: "" },
   { label: "Founded", value: 2024, prefix: "" },
@@ -39,7 +39,7 @@ export const timeline: { year: string; title: string; description: string; icon:
   { year: "2024", title: "Mindle is founded", description: "A product-first AI studio is born with a clear thesis: own the products, don't just build them.", icon: Compass },
   { year: "2024", title: "Services engine online", description: "AI, SaaS, and design engagements begin funding the product roadmap.", icon: Code2 },
   { year: "2025", title: "GitaConnect enters beta", description: "Our flagship AI spiritual companion ships to iOS beta — patent-pending across seven subsystems.", icon: Sparkles },
-  { year: "2026", title: "The product portfolio grows", description: "Nova, Pulse, and Loop move from concept toward launch as Mindle scales.", icon: Rocket },
+  { year: "2026", title: "The product portfolio grows", description: "New products move from concept toward launch as Mindle scales.", icon: Rocket },
 ];
 
 export const personas: { icon: LucideIcon; title: string; description: string }[] = [
