@@ -21,7 +21,7 @@ export function ServicesStrip() {
             <MotionItem key={s.slug}>
               <Link
                 href={`/services#${s.slug}`}
-                className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_20px_50px_-24px_var(--glow)]"
+                className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/35 hover:shadow-lg"
               >
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <s.icon className="h-5 w-5" />

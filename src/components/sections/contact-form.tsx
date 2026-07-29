@@ -113,7 +113,7 @@ export function ContactForm() {
         />
       </div>
 
-      <Button type="submit" variant="gradient" size="lg" className="mt-7 w-full">
+      <Button type="submit" variant="primary" size="lg" className="mt-7 w-full">
         Send message <Send className="h-4 w-4" />
       </Button>
       <p className="mt-3 text-center text-xs text-muted-foreground">

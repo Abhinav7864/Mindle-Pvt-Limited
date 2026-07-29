@@ -22,9 +22,8 @@ export function FinalCTA({
     <section className="py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-[linear-gradient(135deg,color-mix(in_srgb,var(--primary)_12%,var(--card)),color-mix(in_srgb,var(--secondary)_12%,var(--card)))] px-8 py-16 text-center md:px-16 md:py-24">
-            <div className="absolute inset-0 bg-grid opacity-50" />
-            <div className="absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)] blur-2xl" />
+          <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-surface-2 px-8 py-16 text-center md:px-16 md:py-24">
+            <div className="absolute inset-0 bg-grid opacity-30" />
             <div className="relative">
               <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold tracking-tight text-balance sm:text-4xl md:text-5xl">
                 {title}
@@ -33,7 +32,7 @@ export function FinalCTA({
                 {description}
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-                <Button asChild variant="gradient" size="lg">
+                <Button asChild variant="primary" size="lg">
                   <Link href={primaryHref}>
                     {primaryLabel} <ArrowRight className="h-4 w-4" />
                   </Link>

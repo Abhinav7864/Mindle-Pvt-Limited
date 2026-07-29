@@ -20,9 +20,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden pb-20 pt-36 md:pb-28 md:pt-44">
       {/* Backdrop */}
-      <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)]" />
-      <div className="absolute left-1/2 top-[-12rem] -z-10 h-[34rem] w-[54rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)] blur-2xl" />
-      <div className="absolute right-[8%] top-[30%] -z-10 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--secondary)_18%,transparent),transparent)] blur-2xl" />
+      <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)] opacity-50" />
 
       <div className="mx-auto grid w-full max-w-[1280px] items-center gap-16 px-6 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
@@ -47,8 +45,9 @@ export function Hero() {
             animate="visible"
             className="mt-6 font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl md:text-[4.25rem]"
           >
-            We build AI products{" "}
-            <span className="text-gradient animate-gradient-text">
+            We build products{" "}
+            <span className="text-accent inline-flex items-baseline">
+              <span className="animate-pulse mr-1">_</span>
               the future runs on
             </span>
           </motion.h1>
@@ -60,7 +59,7 @@ export function Hero() {
             animate="visible"
             className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
           >
-            Mindle is a product-first AI &amp; software company. We craft
+            Mindle is a product-first  &amp; software company. We craft
             intelligent SaaS platforms, mobile apps, and developer tools — and
             partner with ambitious teams to build theirs.
           </motion.p>
@@ -72,7 +71,7 @@ export function Hero() {
             animate="visible"
             className="mt-9 flex flex-wrap items-center gap-4"
           >
-            <Button asChild variant="gradient" size="lg">
+            <Button asChild variant="primary" size="lg">
               <Link href="/products">
                 Explore Products
                 <ArrowRight className="h-4 w-4" />
@@ -103,7 +102,9 @@ export function Hero() {
           className="relative mx-auto hidden lg:block"
         >
           <div className="animate-[float_6s_ease-in-out_infinite]">
-            <PhoneMockup className="glow-primary" />
+            <div className="animated-border rounded-[2.6rem] p-[2px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
+              <PhoneMockup className="rounded-[2.5rem] relative bg-background" />
+            </div>
           </div>
         </motion.div>
       </div>

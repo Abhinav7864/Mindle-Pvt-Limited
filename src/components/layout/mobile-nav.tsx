@@ -105,7 +105,7 @@ export function MobileNav() {
                   <span className="text-sm text-muted-foreground">Theme</span>
                   <ThemeToggle />
                 </div>
-                <Button asChild variant="gradient" size="lg">
+                <Button asChild variant="primary" size="lg">
                   <Link href="/contact">Work With Us</Link>
                 </Button>
               </div>

@@ -17,7 +17,7 @@ export function ProductsShowcase() {
           eyebrow="Products"
           title={
             <>
-              Products are the <span className="text-gradient">centerpiece</span>
+              Products are the <span className="text-accent">centerpiece</span>
             </>
           }
           description="We don't just build software for others — we own what we ship. Meet the Mindle portfolio."
@@ -25,10 +25,8 @@ export function ProductsShowcase() {
 
         {/* Featured: GitaConnect */}
         <Reveal className="mt-16">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-[var(--surface-1)]">
-            <div className="absolute inset-0 bg-dots opacity-60" />
-            <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,#f59e0b_16%,transparent),transparent)] blur-2xl" />
-            <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--secondary)_16%,transparent),transparent)] blur-2xl" />
+          <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-background shadow-sm">
+            <div className="absolute inset-0 bg-dots opacity-40" />
 
             <div className="relative grid items-center gap-12 p-8 md:p-14 lg:grid-cols-2">
               <div>
@@ -56,7 +54,7 @@ export function ProductsShowcase() {
                   ))}
                 </ul>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Button asChild variant="gradient">
+                  <Button asChild variant="primary">
                     <Link href={`/products/${featuredProduct.slug}`}>
                       Explore {featuredProduct.name}
                       <ArrowRight className="h-4 w-4" />

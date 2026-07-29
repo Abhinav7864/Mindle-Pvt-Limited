@@ -25,7 +25,7 @@ export function ProductCard({
     >
       <Link
         href={`/products/${product.slug}`}
-        className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/35 hover:shadow-[0_24px_60px_-24px_var(--glow)]"
+        className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-accent/35 hover:shadow-lg"
       >
         <div className="flex items-start justify-between gap-3">
           <span
@@ -44,7 +44,7 @@ export function ProductCard({
           {product.name}
           <ArrowUpRight className="h-4 w-4 -translate-x-1 translate-y-1 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
         </h3>
-        <p className="mt-1 text-sm font-medium text-primary">{product.tagline}</p>
+        <p className="mt-1 text-sm font-medium text-accent">{product.tagline}</p>
         <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
           {product.short}
         </p>

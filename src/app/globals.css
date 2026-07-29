@@ -8,68 +8,70 @@
 /* ------------------------------------------------------------------ */
 :root {
   --background: #ffffff;
-  --foreground: #020B24;        /* midnight navy */
+  --foreground: #09090b;
 
   --card: #ffffff;
-  --card-foreground: #020B24;
+  --card-foreground: #09090b;
 
-  --muted: #f4f5f7;
-  --muted-foreground: #555e70;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
 
-  --border: #e7e9ee;
-  --input: #e7e9ee;
-  --ring: #0066FF;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #18181b;
 
   /* Brand */
-  --primary: #0066FF;          /* electric blue from logo */
-  --primary-foreground: #ffffff;
-  --secondary: #7c3aed;        /* purple from logo dot */
-  --secondary-foreground: #ffffff;
+  --primary: #09090b;          /* Clean black */
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;        
+  --secondary-foreground: #09090b;
 
-  --accent: #eef2ff;
-  --accent-foreground: #1e293b;
+  --accent: #C4653A;           /* Chase AI style accent orange/brown */
+  --accent-foreground: #ffffff;
 
-  --success: #16a34a;
-  --warning: #f59e0b;
+  --success: #28C840;
+  --warning: #FEBC2E;
+  --error: #FF5F57;
 
-  --radius: 1rem;
+  --radius: 0.75rem;
 
   /* Surfaces used by gradients / glows */
-  --surface-1: #fbfcfe;
-  --surface-2: #f4f6fb;
-  --grid-line: rgba(15, 23, 42, 0.05);
-  --glow: rgba(0, 102, 255, 0.18);
+  --surface-1: #fafafa;
+  --surface-2: #f4f4f5;
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --glow: rgba(0, 0, 0, 0.04);
 }
 
 .dark {
-  --background: #030712;        /* midnight navy background */
-  --foreground: #f2f4f8;
+  --background: #09090b;
+  --foreground: #fafafa;
 
-  --card: #090d1a;              /* midnight navy card */
-  --card-foreground: #f2f4f8;
+  --card: #09090b;
+  --card-foreground: #fafafa;
 
-  --muted: #0e1424;
-  --muted-foreground: #9aa3b2;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
 
-  --border: #161b2c;
-  --input: #1a2034;
-  --ring: #0084FF;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #d4d4d8;
 
-  --primary: #0084FF;          /* electric blue from logo */
-  --primary-foreground: #ffffff;
-  --secondary: #a78bfa;        /* purple from logo dot */
-  --secondary-foreground: #0b1120;
+  --primary: #fafafa;
+  --primary-foreground: #09090b;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
 
-  --accent: #0f1527;
-  --accent-foreground: #dbe4ff;
+  --accent: #C4653A;
+  --accent-foreground: #ffffff;
 
   --success: #22c55e;
   --warning: #fbbf24;
+  --error: #ef4444;
 
-  --surface-1: #050a1a;
-  --surface-2: #090f24;
-  --grid-line: rgba(255, 255, 255, 0.045);
-  --glow: rgba(0, 132, 255, 0.22);
+  --surface-1: #18181b;
+  --surface-2: #27272a;
+  --grid-line: rgba(255, 255, 255, 0.04);
+  --glow: rgba(255, 255, 255, 0.02);
 }
 
 /* ------------------------------------------------------------------ */
@@ -99,24 +101,24 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 0.35rem);
-  --radius-sm: calc(var(--radius) - 0.55rem);
+  --radius-md: calc(var(--radius) - 0.25rem);
+  --radius-sm: calc(var(--radius) - 0.5rem);
 
-  --animate-gradient: gradient 8s ease infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-marquee: marquee 32s linear infinite;
+  --animate-border-spin: border-spin 4s linear infinite;
 
-  @keyframes gradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    50% { transform: translateY(-6px); }
   }
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
+  }
+  @keyframes border-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 }
 
@@ -147,7 +149,7 @@
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: color-mix(in srgb, var(--primary) 22%, transparent);
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
   }
   :focus-visible {
     outline: 2px solid var(--ring);
@@ -161,37 +163,47 @@
 /* ------------------------------------------------------------------ */
 @layer utilities {
   .text-gradient {
-    background-image: linear-gradient(
-      110deg,
-      var(--foreground) 0%,
-      var(--primary) 45%,
-      var(--secondary) 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    /* Removed heavy gradient, keeping a simple clean text style */
+    color: var(--foreground);
   }
   .bg-grid {
     background-image:
       linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 56px 56px;
+    background-size: 40px 40px;
   }
   .bg-dots {
     background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
     background-size: 22px 22px;
   }
   .glass {
-    background: color-mix(in srgb, var(--card) 72%, transparent);
-    backdrop-filter: blur(14px) saturate(140%);
-  }
-  .animate-gradient-text {
-    background-size: 200% auto;
-    animation: var(--animate-gradient);
+    background: color-mix(in srgb, var(--card) 85%, transparent);
+    backdrop-filter: blur(8px);
   }
   .glow-primary {
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent),
-      0 20px 60px -20px var(--glow);
+    /* Muted glow to a subtle shadow */
+    box-shadow: 0 4px 20px -4px var(--glow);
+  }
+  .animated-border {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    inset: -100%;
+    background: conic-gradient(transparent, var(--accent), transparent 30%);
+    animation: var(--animate-border-spin);
+    z-index: -1;
+  }
+  .animated-border::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: var(--background);
+    border-radius: inherit;
+    z-index: -1;
   }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

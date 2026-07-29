@@ -41,8 +41,8 @@ export function Personas() {
         <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {personas.map((p) => (
             <MotionItem key={p.title}>
-              <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/35">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
+              <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/35">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                   <p.icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-display text-base font-semibold">{p.title}</h3>
@@ -74,7 +74,7 @@ export function Testimonials() {
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[linear-gradient(135deg,var(--primary),var(--secondary))] text-xs font-bold text-white">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
                     {t.initials}
                   </span>
                   <div>

@@ -18,7 +18,7 @@ export default function ProductsPage() {
         eyebrow="Products"
         title={
           <>
-            Software we <span className="text-gradient">own and love</span>
+            Software we <span className="text-accent">own and love</span>
           </>
         }
         description="Mindle is a product-first company. This portfolio is why we exist — each product built with the same obsession for craft, trust, and intelligence."

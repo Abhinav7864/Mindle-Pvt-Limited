@@ -37,7 +37,7 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border glass"
+          ? "border-b border-border/50 bg-background/80 backdrop-blur-md shadow-sm"
           : "border-b border-transparent bg-transparent"
       )}
       onMouseLeave={() => setOpenMenu(null)}
@@ -93,7 +93,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle className="hidden sm:grid" />
-          <Button asChild variant="gradient" size="sm" className="hidden sm:inline-flex">
+          <Button asChild variant="primary" size="sm" className="hidden sm:inline-flex">
             <Link href="/contact">Work With Us</Link>
           </Button>
           <MobileNav />
@@ -111,7 +111,7 @@ export function Navbar() {
             className="absolute inset-x-0 top-16 hidden lg:block"
           >
             <div className="mx-auto max-w-[1280px] px-6 md:px-8">
-              <div className="glass overflow-hidden rounded-2xl border border-border shadow-2xl">
+              <div className="bg-background overflow-hidden rounded-2xl border border-border/50 shadow-lg">
                 <MegaMenu type={openMenu} />
               </div>
             </div>

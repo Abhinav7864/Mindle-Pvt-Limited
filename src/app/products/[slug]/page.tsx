@@ -87,7 +87,7 @@ export default async function ProductPage({ params }: Props) {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild variant="gradient" size="lg">
+              <Button asChild variant="primary" size="lg">
                 <Link href={product.cta.href}>
                   {product.cta.label} <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -110,7 +110,7 @@ export default async function ProductPage({ params }: Props) {
           <Reveal className="mx-auto hidden lg:block" delay={2}>
             {isGitaConnect ? (
               <div className="animate-[float_6s_ease-in-out_infinite]">
-                <PhoneMockup className="glow-primary" />
+                <PhoneMockup className="shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] rounded-[2.5rem]" />
               </div>
             ) : (
               <div
@@ -170,13 +170,8 @@ export default async function ProductPage({ params }: Props) {
           <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {product.features.map((f) => (
               <MotionItem key={f.title}>
-                <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/35">
-                  <span
-                    className="grid h-11 w-11 place-items-center rounded-xl text-white"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, ${product.gradient[0]}, ${product.gradient[1]})`,
-                    }}
-                  >
+                <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/35">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                     <f.icon className="h-5 w-5" />
                   </span>
                   <h3 className="mt-4 font-display text-base font-semibold">
