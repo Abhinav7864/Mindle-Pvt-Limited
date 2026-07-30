@@ -19,7 +19,7 @@ export default function BlogPage() {
             Notes from the <span className="text-gradient">workshop</span>
           </>
         }
-        description="How we build — AI systems, design decisions, engineering patterns, and startup lessons, written by the people doing the work."
+        description="How we build  systems, design decisions, engineering patterns, and startup lessons, written by the people doing the work."
       />
 
       <section className="py-20 md:py-24">

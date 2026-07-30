@@ -25,7 +25,7 @@ export default function AboutPage() {
             <span className="text-gradient">built to last</span>
           </>
         }
-        description="Mindle exists to create software products that outlive any single engagement — intelligent, human-centered, and crafted with care."
+        description="Mindle exists to create software products that outlive any single engagement intelligent, human-centered, and crafted with care."
       />
 
       {/* Mission / Vision / Why */}
@@ -115,7 +115,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Team"
             title="The people behind Mindle"
-            description="A small, senior team of builders — inventors on the GitaConnect patent and owners of everything we ship."
+            description="A small, senior team of builders inventors on the GitaConnect patent and owners of everything we ship."
           />
           <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m) => (

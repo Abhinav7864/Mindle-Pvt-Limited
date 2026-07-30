@@ -26,12 +26,7 @@ export function PageHeader({
       <div className="absolute left-1/2 top-[-14rem] -z-10 h-[28rem] w-[46rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)] blur-2xl" />
       <div className="mx-auto w-full max-w-[1280px] px-6 text-center md:px-8">
         <Reveal className="flex flex-col items-center gap-5">
-          {eyebrow && (
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-3.5 py-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              {eyebrow}
-            </span>
-          )}
+
           <h1 className="mx-auto max-w-3xl font-display text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl md:leading-[1.06]">
             {title}
           </h1>

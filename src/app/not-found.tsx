@@ -13,7 +13,7 @@ export default function NotFound() {
           This page wandered off
         </h1>
         <p className="mx-auto mt-2 max-w-sm text-muted-foreground">
-          The page you&apos;re looking for doesn&apos;t exist — but our products do.
+          The page you&apos;re looking for doesn&apos;t exist but our products do.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild variant="gradient">

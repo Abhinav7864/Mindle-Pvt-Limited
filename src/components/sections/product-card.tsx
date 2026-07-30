@@ -28,15 +28,21 @@ export function ProductCard({
         className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-accent/35 hover:shadow-lg"
       >
         <div className="flex items-start justify-between gap-3">
-          <span
-            className="grid h-12 w-12 place-items-center rounded-xl text-lg font-bold text-white shadow-lg"
-            style={{
-              backgroundImage: `linear-gradient(135deg, ${product.gradient[0]}, ${product.gradient[1]})`,
-            }}
-            aria-hidden="true"
-          >
-            {product.name.charAt(0)}
-          </span>
+          {product.slug === "gitaconnect" ? (
+            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-xl shadow-lg bg-[#f5e6a3]">
+              <img src="/Gitalogo.png" alt="GitaConnect" className="h-full w-full object-cover" />
+            </span>
+          ) : (
+            <span
+              className="grid h-12 w-12 place-items-center rounded-xl text-lg font-bold text-white shadow-lg"
+              style={{
+                backgroundImage: `linear-gradient(135deg, ${product.gradient[0]}, ${product.gradient[1]})`,
+              }}
+              aria-hidden="true"
+            >
+              {product.name.charAt(0)}
+            </span>
+          )}
           <StatusBadge status={product.status} />
         </div>
 

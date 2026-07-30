@@ -22,7 +22,7 @@ export const team: TeamMember[] = [
   {
     name: "Omkar Pujeri",
     role: "Co-Founder",
-    bio: "Owns architecture and engineering — from offline-first data layers to AI inference pipelines.",
+    bio: "Owns architecture and engineering  from offline-first data layers to AI inference pipelines.",
     initials: "OP",
     gradient: ["#06b6d4", "#2563eb"],
     image: "/Omkar.jpg",

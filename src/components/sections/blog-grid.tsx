@@ -97,7 +97,7 @@ export function BlogGrid() {
 
       {posts.length === 0 && (
         <p className="mt-16 text-center text-muted-foreground">
-          No posts in this category yet — check back soon.
+          No posts in this category yet check back soon.
         </p>
       )}
     </div>

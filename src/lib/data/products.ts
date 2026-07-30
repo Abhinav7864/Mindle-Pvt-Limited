@@ -71,7 +71,7 @@ export const products: Product[] = [
     description:
       "GitaConnect turns 700 Sanskrit verses into a living, personal practice. A domain-locked AI mentor, mood-driven verse recommendations, a scrollable spiritual feed, gamified challenges, a 140-mantra library with a digital Jaap counter, and 90-day analytics come together in one offline-first platform.",
     hero: {
-      headline: "Meet the Gita where you are — emotionally, daily, in your language.",
+      headline: "Meet the Gita where you are emotionally, daily, in your language.",
       subhead:
         "GitaConnect combines a domain-restricted AI mentor, mood-based verse guidance, gamified practice, and spiritual analytics into one beautifully cohesive app grounded entirely in the Bhagavad Gita.",
     },
@@ -79,7 +79,7 @@ export const products: Product[] = [
       "700-verse device-resident scripture datastore",
       "11 Indian languages with strict language-lock",
       "Anti-hallucination AI verified against scripture",
-      "Offline-first — nothing is ever lost",
+      "Offline-first nothing is ever lost",
     ],
     features: [
       {
@@ -116,7 +116,7 @@ export const products: Product[] = [
         icon: MessagesSquare,
         title: "Verse-Context Conversational AI",
         description:
-          "Open a chat pre-seeded with the exact chapter and verse you're reading — the mentor addresses that teaching directly, no typing the reference required.",
+          "Open a chat pre-seeded with the exact chapter and verse you're reading the mentor addresses that teaching directly, no typing the reference required.",
       },
       {
         icon: BarChart3,
@@ -152,7 +152,7 @@ export const products: Product[] = [
     faq: [
       {
         q: "Which languages does the AI mentor support?",
-        a: "Eleven Indian languages — English, Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, and Odia. A language-lock constraint ensures the mentor always replies in your chosen language, regardless of input language.",
+        a: "Eleven Indian languages  English, Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, and Odia. A language-lock constraint ensures the mentor always replies in your chosen language, regardless of input language.",
       },
       {
         q: "How does GitaConnect avoid AI hallucinations?",
@@ -164,7 +164,7 @@ export const products: Product[] = [
       },
       {
         q: "What is the Digital Jaap counter?",
-        a: "A full-screen tap counter for mantra repetition. Each tap gives a light haptic pulse; completing a full mala (default 108) triggers a heavier pulse — so you can practise without looking at the screen.",
+        a: "A full-screen tap counter for mantra repetition. Each tap gives a light haptic pulse; completing a full mala (default 108) triggers a heavier pulse so you can practise without looking at the screen.",
       },
       {
         q: "Is GitaConnect available now?",

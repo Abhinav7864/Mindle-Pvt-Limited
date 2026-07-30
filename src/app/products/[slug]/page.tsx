@@ -58,13 +58,8 @@ export default async function ProductPage({ params }: Props) {
         <div className="mx-auto grid w-full max-w-[1280px] items-center gap-14 px-6 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal>
             <div className="flex flex-wrap items-center gap-3">
-              <span
-                className="grid h-14 w-14 place-items-center rounded-2xl text-xl font-bold text-white shadow-lg"
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${product.gradient[0]}, ${product.gradient[1]})`,
-                }}
-              >
-                {product.name.charAt(0)}
+              <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-2xl shadow-lg bg-[#f5e6a3]">
+                <img src="/Gitalogo.png" alt="GitaConnect" className="h-full w-full object-cover" />
               </span>
               <div>
                 <div className="flex items-center gap-2.5">
@@ -121,16 +116,13 @@ export default async function ProductPage({ params }: Props) {
               >
                 <div className="bg-dots absolute inset-0" />
                 <div className="relative text-center">
-                  <span
-                    className="mx-auto grid h-20 w-20 place-items-center rounded-3xl text-3xl font-bold text-white shadow-2xl"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, ${product.gradient[0]}, ${product.gradient[1]})`,
-                    }}
-                  >
-                    {product.name.charAt(0)}
-                  </span>
+                  <img
+                    src="/Gitalogo.png"
+                    alt="GitaConnect"
+                    className="h-24 w-24 object-contain"
+                  />
                   <p className="mt-4 text-sm font-medium text-muted-foreground">
-                    In development — join the waitlist
+                    In development, join the waitlist
                   </p>
                 </div>
               </div>

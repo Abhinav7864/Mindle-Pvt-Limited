@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Product-first AI & Software Company`,
+    default: `${siteConfig.name} Product-first AI & Software Company`,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -39,12 +39,12 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Product-first AI & Software Company`,
+    title: `${siteConfig.name} Product-first AI & Software Company`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Product-first AI & Software Company`,
+    title: `${siteConfig.name} Product-first AI & Software Company`,
     description: siteConfig.description,
     creator: "@mindlehq",
   },

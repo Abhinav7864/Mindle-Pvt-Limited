@@ -11,7 +11,7 @@ import { services } from "@/lib/data/services";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "AI development, SaaS, full-stack, mobile, UI/UX, automation, and cloud — product-grade engineering for ambitious teams.",
+    "AI development, SaaS, full-stack, mobile, UI/UX, automation, and cloud  product-grade engineering for ambitious teams.",
 };
 
 export default function ServicesPage() {
@@ -99,7 +99,7 @@ export default function ServicesPage() {
 
       <FinalCTA
         title="Not sure which service fits?"
-        description="Tell us what you're trying to build — we'll recommend the shortest path to shipped."
+        description="Tell us what you're trying to build we'll recommend the shortest path to shipped."
         primaryLabel="Talk to us"
         secondaryLabel="See case studies"
         secondaryHref="/case-studies"

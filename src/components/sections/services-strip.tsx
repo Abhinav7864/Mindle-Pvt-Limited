@@ -13,7 +13,7 @@ export function ServicesStrip() {
         <SectionHeading
           eyebrow="Services"
           title="Need a team that ships like it owns the product?"
-          description="Services fund our mission — and you get product-grade craft on your build. Strategy to shipped, with the same care we put into our own portfolio."
+          description="Services fund our mission and you get product-grade craft on your build. Strategy to shipped, with the same care we put into our own portfolio."
         />
 
         <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 
 export function FinalCTA({
-  title = "Let's build what's next — together.",
+  title = "Let's build what's next together.",
   description = "Whether you want to explore our products or bring us in to build yours, we'd love to talk.",
   primaryLabel = "Work With Us",
   primaryHref = "/contact",

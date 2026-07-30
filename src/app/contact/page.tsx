@@ -35,7 +35,7 @@ export default function ContactPage() {
             Let&apos;s <span className="text-gradient">talk</span>
           </>
         }
-        description="Product questions, project ideas, partnerships — we read everything and reply fast."
+        description="Product questions, project ideas, partnerships we read everything and reply fast."
       />
 
       <section className="py-20 md:py-24">
