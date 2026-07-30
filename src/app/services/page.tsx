@@ -24,7 +24,7 @@ export default function ServicesPage() {
             Product-grade craft, <span className="text-gradient">for hire</span>
           </>
         }
-        description="Services fund our product mission — which means you get a team that builds your software like it owns it. Eight disciplines, one standard of craft."
+        description="Services fund our product mission which means you get a team that builds your software like it owns it. Eight disciplines, one standard of craft."
       />
 
       <section className="py-20 md:py-24">

@@ -11,7 +11,7 @@ import { caseStudies } from "@/lib/data/case-studies";
 export const metadata: Metadata = {
   title: "Case Studies",
   description:
-    "Featured Mindle projects — the problems, solutions, technologies, and measurable results.",
+    "Featured Mindle projects the problems, solutions, technologies, and measurable results.",
 };
 
 export default function CaseStudiesPage() {
@@ -117,7 +117,7 @@ export default function CaseStudiesPage() {
 
       <FinalCTA
         title="Your product could be the next case study."
-        description="Bring us the problem — we'll bring the craft."
+        description="Bring us the problem  we'll bring the craft."
       />
     </>
   );

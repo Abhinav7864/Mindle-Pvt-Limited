@@ -20,7 +20,7 @@ export function ProductsShowcase() {
               Products are the <span className="text-accent">centerpiece</span>
             </>
           }
-          description="We don't just build software for others — we own what we ship. Meet the Mindle portfolio."
+          description="We don't just build software for others we own what we ship. Meet the Mindle portfolio."
         />
 
         {/* Featured: GitaConnect */}

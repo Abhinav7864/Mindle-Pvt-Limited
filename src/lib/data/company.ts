@@ -18,9 +18,9 @@ export const companyStats = [
 ];
 
 export const values: { icon: LucideIcon; title: string; description: string }[] = [
-  { icon: Rocket, title: "Products over projects", description: "We build things we own and love — services fund the mission, products are the mission." },
+  { icon: Rocket, title: "Products over projects", description: "We build things we own and love  services fund the mission, products are the mission." },
   { icon: ShieldCheck, title: "Trust by design", description: "Grounded AI, privacy-first data, and honest engineering. No hallucinations, no dark patterns." },
-  { icon: Sparkles, title: "Craft in the details", description: "Micro-interactions, haptics, and typography — the small things are the product." },
+  { icon: Sparkles, title: "Craft in the details", description: "Micro-interactions, haptics, and typography  the small things are the product." },
   { icon: HeartHandshake, title: "Human-centered AI", description: "Technology should meet people where they are, emotionally and culturally." },
   { icon: Users, title: "Small team, high trust", description: "Tight feedback loops, real ownership, and a bias toward shipping." },
   { icon: TrendingUp, title: "Built for the long game", description: "We optimize for durable products, not short-term wins." },
@@ -32,7 +32,7 @@ export const mission = {
   vision:
     "To become a product-first company that owns a portfolio of successful SaaS platforms, mobile apps, AI tools, and developer products used around the world.",
   why:
-    "Great companies are defined by what they build, not what they bill. Services keep the lights on — but Mindle exists to create products that outlast any single engagement. GitaConnect is the first of many.",
+    "Great companies are defined by what they build, not what they bill. Services keep the lights on but Mindle exists to create products that outlast any single engagement. GitaConnect is the first of many.",
 };
 
 export const timeline: { year: string; title: string; description: string; icon: LucideIcon }[] = [
@@ -50,8 +50,8 @@ export const personas: { icon: LucideIcon; title: string; description: string }[
 ];
 
 export const testimonials: { quote: string; name: string; title: string; initials: string }[] = [
-  { quote: "Mindle shipped our AI feature in weeks, not quarters — and it actually works in production.", name: "Ananya R.", title: "Founder, early-stage SaaS", initials: "AR" },
+  { quote: "Mindle shipped our AI feature in weeks, not quarters and it actually works in production.", name: "Ananya R.", title: "Founder, early-stage SaaS", initials: "AR" },
   { quote: "The craft is on another level. It feels like a Linear or Stripe product, but it's ours.", name: "Daniel M.", title: "Head of Product", initials: "DM" },
   { quote: "They think about trust and edge cases the way we wish every vendor did.", name: "Priya S.", title: "Engineering Lead", initials: "PS" },
-  { quote: "GitaConnect is genuinely delightful — the haptics and the mentor feel magical.", name: "Rohan K.", title: "Beta user", initials: "RK" },
+  { quote: "GitaConnect is genuinely delightful the haptics and the mentor feel magical.", name: "Rohan K.", title: "Beta user", initials: "RK" },
 ];

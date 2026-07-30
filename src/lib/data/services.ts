@@ -67,7 +67,7 @@ export const services: Service[] = [
     name: "Mobile Apps",
     icon: Smartphone,
     short: "Native-feeling iOS & Android experiences.",
-    what: "From concept to the App Store: performant, delightful mobile apps with offline first data, haptics, and native integrations — the craft behind GitaConnect.",
+    what: "From concept to the App Store: performant, delightful mobile apps with offline first data, haptics, and native integrations the craft behind GitaConnect.",
     process: ["Product & UX", "Native build", "Beta & TestFlight", "Store launch"],
     technologies: ["Swift", "SwiftUI", "React Native", "Expo", "Supabase"],
     timeline: "8–20 weeks",
