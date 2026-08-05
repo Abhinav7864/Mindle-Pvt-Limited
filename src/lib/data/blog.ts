@@ -32,7 +32,7 @@ export const blogPosts: BlogPost[] = [
     slug: "building-anti-hallucination-ai",
     title: "How we built an anti-hallucination AI mentor for GitaConnect",
     excerpt:
-      "Domain-locking an LLM to a single canonical text — and validating every citation against a device-resident datastore.",
+      "Domain-locking an LLM to a single canonical text  and validating every citation against a device-resident datastore.",
     category: "AI",
     author: "Aryan Dev",
     date: "2026-05-18",
@@ -44,7 +44,7 @@ export const blogPosts: BlogPost[] = [
     slug: "offline-first-mobile-architecture",
     title: "Offline-first, done right: our hybrid persistence pattern",
     excerpt:
-      "Write local first, sync to the cloud with a retry-safe scheduler — so users never lose a single tap.",
+      "Write local first, sync to the cloud with a retry-safe scheduler so users never lose a single tap.",
     category: "Engineering",
     author: "Omkar Pujeri",
     date: "2026-04-30",

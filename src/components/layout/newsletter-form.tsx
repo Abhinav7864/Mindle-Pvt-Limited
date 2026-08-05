@@ -39,7 +39,7 @@ export function NewsletterForm({ className }: { className?: string }) {
       </div>
       {done && (
         <p className="text-xs text-[var(--success)]">
-          Thanks  you&apos;re on the list.
+          Thanks! You&apos;re on the list.
         </p>
       )}
     </form>

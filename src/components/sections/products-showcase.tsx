@@ -31,7 +31,6 @@ export function ProductsShowcase() {
             <div className="relative grid items-center gap-12 p-8 md:p-14 lg:grid-cols-2">
               <div>
                 <div className="flex items-center gap-3">
-                  <StatusBadge status={featuredProduct.status} />
                   <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                     Flagship · {featuredProduct.category} · {featuredProduct.platform}
                   </span>
@@ -61,7 +60,13 @@ export function ProductsShowcase() {
                     </Link>
                   </Button>
                   <Button asChild variant="outline">
-                    <Link href={featuredProduct.cta.href}>{featuredProduct.cta.label}</Link>
+                    <Link
+                      href={featuredProduct.cta.href}
+                      target={featuredProduct.cta.href.startsWith("http") ? "_blank" : undefined}
+                      rel={featuredProduct.cta.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      {featuredProduct.cta.label}
+                    </Link>
                   </Button>
                 </div>
               </div>

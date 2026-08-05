@@ -25,7 +25,7 @@ export function ProductCard({
     >
       <Link
         href={`/products/${product.slug}`}
-        className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-accent/35 hover:shadow-lg"
+        className="flex h-full flex-col rounded-2xl border border-border bg-card p-6"
       >
         <div className="flex items-start justify-between gap-3">
           {product.slug === "gitaconnect" ? (
@@ -43,7 +43,6 @@ export function ProductCard({
               {product.name.charAt(0)}
             </span>
           )}
-          <StatusBadge status={product.status} />
         </div>
 
         <h3 className="mt-5 flex items-center gap-1.5 font-display text-xl font-bold tracking-tight">
@@ -55,9 +54,8 @@ export function ProductCard({
           {product.short}
         </p>
 
-        <div className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">
-          <span className="rounded-full bg-muted px-2.5 py-1">{product.category}</span>
-          <span className="rounded-full bg-muted px-2.5 py-1">{product.platform}</span>
+        <div className="mt-5 text-xs text-muted-foreground font-medium">
+          {product.category} · {product.platform}
         </div>
       </Link>
     </motion.div>

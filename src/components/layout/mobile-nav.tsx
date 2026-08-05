@@ -94,7 +94,6 @@ export function MobileNav() {
                       className="flex items-center justify-between gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-muted"
                     >
                       <span className="text-sm font-medium">{p.label}</span>
-                      <StatusBadge status={p.status} />
                     </Link>
                   ))}
                 </div>

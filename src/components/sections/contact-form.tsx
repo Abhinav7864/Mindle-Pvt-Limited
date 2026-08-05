@@ -33,9 +33,32 @@ export function ContactForm() {
       ? "Build with Mindle (services)"
       : topics[0];
 
-  function onSubmit(e: React.FormEvent) {
+  const [submitting, setSubmitting] = React.useState(false);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const topic = formData.get("topic") as string;
+    const message = formData.get("message") as string;
+
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, topic, message }),
+      });
+    } catch (err) {
+      console.error("Form submission error:", err);
+    } finally {
+      setSubmitting(false);
+      setSent(true);
+    }
   }
 
   if (sent) {
@@ -113,8 +136,8 @@ export function ContactForm() {
         />
       </div>
 
-      <Button type="submit" variant="primary" size="lg" className="mt-7 w-full">
-        Send message <Send className="h-4 w-4" />
+      <Button type="submit" variant="primary" size="lg" disabled={submitting} className="mt-7 w-full">
+        {submitting ? "Sending..." : "Send message"} <Send className="h-4 w-4" />
       </Button>
       <p className="mt-3 text-center text-xs text-muted-foreground">
         We&apos;ll never share your details. Usually we reply within a day.

@@ -41,7 +41,7 @@ export function Reveal({
   );
 }
 
-/** Staggered container — children use <Reveal> or motion items. */
+/** Staggered container children use <Reveal> or motion items. */
 export function RevealGroup({
   children,
   className,

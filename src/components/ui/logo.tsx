@@ -13,7 +13,7 @@ export function Logo({
   return (
     <Link
       href="/"
-      aria-label="Mindle — home"
+      aria-label="Mindle  home"
       className={cn("group inline-flex items-center gap-2.5", className)}
     >
       <svg

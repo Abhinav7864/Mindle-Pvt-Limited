@@ -14,6 +14,7 @@ interface AnimatedCounterProps {
   suffix?: string;
   prefix?: string;
   decimals?: number;
+  formatCommas?: boolean;
   className?: string;
 }
 
@@ -22,17 +23,17 @@ export function AnimatedCounter({
   suffix = "",
   prefix = "",
   decimals = 0,
+  formatCommas = false,
   className,
 }: AnimatedCounterProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { damping: 40, stiffness: 90 });
-  const display = useTransform(spring, (latest) =>
-    `${prefix}${latest
-      .toFixed(decimals)
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${suffix}`
-  );
+  const display = useTransform(spring, (latest) => {
+    const formatted = latest.toFixed(decimals);
+    return `${prefix}${formatCommas ? formatted.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : formatted}${suffix}`;
+  });
 
   React.useEffect(() => {
     if (inView) motionValue.set(value);

@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { RevealGroup } from "@/components/ui/reveal";
 import { MotionItem } from "@/components/sections/motion-item";
-import { personas, testimonials, companyStats } from "@/lib/data/company";
+import { personas, companyStats } from "@/lib/data/company";
 
 export function Metrics() {
   return (
@@ -36,7 +36,7 @@ export function Personas() {
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <SectionHeading
           eyebrow="Who we build for"
-          title="Built for the people building the future"
+          title="Built for the people building  "
         />
         <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {personas.map((p) => (
@@ -50,39 +50,6 @@ export function Personas() {
                   {p.description}
                 </p>
               </div>
-            </MotionItem>
-          ))}
-        </RevealGroup>
-      </div>
-    </section>
-  );
-}
-
-export function Testimonials() {
-  return (
-    <section className="border-y border-border bg-[var(--surface-1)] py-24 md:py-32">
-      <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
-        <SectionHeading
-          eyebrow="Testimonials"
-          title="Teams talk. Here's what they say."
-        />
-        <RevealGroup className="mt-14 grid gap-4 md:grid-cols-2">
-          {testimonials.map((t) => (
-            <MotionItem key={t.name}>
-              <figure className="flex h-full flex-col rounded-2xl border border-border bg-card p-7">
-                <blockquote className="flex-1 text-base leading-relaxed">
-                  “{t.quote}”
-                </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
-                    {t.initials}
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.title}</p>
-                  </div>
-                </figcaption>
-              </figure>
             </MotionItem>
           ))}
         </RevealGroup>

@@ -20,6 +20,14 @@ export const team: TeamMember[] = [
     image: "/Abhinav.JPG",
   },
   {
+    name: "Abhijit Balpande",
+    role: "Co-Founder",
+    bio: "Bridges design and engineering to turn ideas into polished, shippable features.",
+    initials: "AB",
+    gradient: ["#f59e0b", "#2563eb"],
+    image: "/Abhjit.jpeg",
+  },
+  {
     name: "Omkar Pujeri",
     role: "Co-Founder",
     bio: "Owns architecture and engineering  from offline-first data layers to AI inference pipelines.",
@@ -34,13 +42,5 @@ export const team: TeamMember[] = [
     initials: "AD",
     gradient: ["#7c3aed", "#ec4899"],
     image: "/Aryan.png",
-  },
-  {
-    name: "Abhijit Balpande",
-    role: "Co-Founder",
-    bio: "Bridges design and engineering to turn ideas into polished, shippable features.",
-    initials: "AB",
-    gradient: ["#f59e0b", "#2563eb"],
-    image: "/Abhjit.jpeg",
   },
 ];

@@ -8,7 +8,7 @@ import { products, toCardData } from "@/lib/data/products";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "The Mindle product portfolio — AI-powered SaaS platforms, mobile apps, and developer tools. Starting with GitaConnect.",
+    "The Mindle product portfolio AI-powered SaaS platforms, mobile apps, and developer tools. Starting with GitaConnect.",
 };
 
 export default function ProductsPage() {
@@ -32,7 +32,7 @@ export default function ProductsPage() {
             ))}
           </RevealGroup>
           <p className="mt-10 text-center text-sm text-muted-foreground">
-            More products are on the roadmap — this portfolio is designed to grow.
+            More products are on the roadmap  this portfolio is designed to grow.
           </p>
         </div>
       </section>

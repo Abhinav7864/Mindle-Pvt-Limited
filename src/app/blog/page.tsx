@@ -30,7 +30,7 @@ export default function BlogPage() {
 
       <FinalCTA
         title="Want these in your inbox?"
-        description="Subscribe to the newsletter in the footer — product updates and engineering notes, no spam."
+        description="Subscribe to the newsletter in the footer product updates and engineering notes, no spam."
         primaryLabel="Work With Us"
         secondaryLabel="Explore Products"
       />

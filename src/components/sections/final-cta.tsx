@@ -33,7 +33,11 @@ export function FinalCTA({
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
                 <Button asChild variant="primary" size="lg">
-                  <Link href={primaryHref}>
+                  <Link
+                    href={primaryHref}
+                    target={primaryHref.startsWith("http") ? "_blank" : undefined}
+                    rel={primaryHref.startsWith("http") ? "noopener noreferrer" : undefined}
+                  >
                     {primaryLabel} <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>

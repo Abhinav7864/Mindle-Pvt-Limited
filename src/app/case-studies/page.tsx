@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FinalCTA } from "@/components/sections/final-cta";
 import { caseStudies } from "@/lib/data/case-studies";
+import { CaseStudyVisual } from "@/components/sections/case-study-visual";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -21,7 +22,7 @@ export default function CaseStudiesPage() {
         eyebrow="Case Studies"
         title={
           <>
-            Proof, <span className="text-gradient">not promises</span>
+            Proof, <span className="text-accent">not promises</span>
           </>
         }
         description="A look at the problems we've solved, how we solved them, and what changed for the teams we worked with."
@@ -36,30 +37,7 @@ export default function CaseStudiesPage() {
                   className={`grid gap-0 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}
                 >
                   {/* Visual */}
-                  <div
-                    className="relative flex min-h-[280px] items-center justify-center overflow-hidden lg:[direction:ltr]"
-                    style={{
-                      background: `linear-gradient(135deg, ${cs.gradient[0]}24, ${cs.gradient[1]}24)`,
-                    }}
-                  >
-                    <div className="bg-grid absolute inset-0 opacity-70" />
-                    <div className="relative grid gap-3 p-10 sm:grid-cols-2">
-                      {cs.results.map((r) => (
-                        <div
-                          key={r.label}
-                          className="glass rounded-2xl border border-border px-5 py-4 text-center shadow-lg"
-                        >
-                          <p
-                            className="font-display text-2xl font-extrabold tracking-tight"
-                            style={{ color: cs.gradient[1] }}
-                          >
-                            {r.value}
-                          </p>
-                          <p className="mt-0.5 text-xs text-muted-foreground">{r.label}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <CaseStudyVisual results={cs.results} />
 
                   {/* Content */}
                   <div className="p-8 md:p-12 lg:[direction:ltr]">
@@ -108,7 +86,7 @@ export default function CaseStudiesPage() {
           <Reveal className="text-center">
             <Button asChild variant="ghost">
               <Link href="/contact">
-                Want results like these? <ArrowRight className="h-4 w-4" />
+                 <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
           </Reveal>

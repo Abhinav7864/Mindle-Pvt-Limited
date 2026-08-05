@@ -11,7 +11,7 @@ import { team } from "@/lib/data/team";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Mindle's mission, vision, values, journey, and the team building a product-first AI company.",
+    "Mindle's mission, vision, values, journey, and the team building a product-first company.",
 };
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
         title={
           <>
             A product-first company,{" "}
-            <span className="text-gradient">built to last</span>
+            <span className="text-accent">built to last</span>
           </>
         }
         description="Mindle exists to create software products that outlive any single engagement intelligent, human-centered, and crafted with care."
@@ -38,7 +38,7 @@ export default function AboutPage() {
           ].map((m, i) => (
             <Reveal key={m.title} delay={i}>
               <div className="h-full rounded-3xl border border-border bg-card p-8">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                   <m.icon className="h-5 w-5" />
                 </span>
                 <h2 className="mt-4 font-display text-lg font-bold">{m.title}</h2>
@@ -58,8 +58,8 @@ export default function AboutPage() {
           <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {values.map((v) => (
               <MotionItem key={v.title}>
-                <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/35">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
+                <div className="h-full rounded-2xl border border-border bg-card p-6">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                     <v.icon className="h-5 w-5" />
                   </span>
                   <h3 className="mt-4 font-display text-base font-semibold">{v.title}</h3>
@@ -120,7 +120,7 @@ export default function AboutPage() {
           <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((m) => (
               <MotionItem key={m.name}>
-                <div className="h-full rounded-2xl border border-border bg-card p-6 text-center transition-colors hover:border-primary/35">
+                <div className="h-full rounded-2xl border border-border bg-card p-6 text-center">
                   {m.image ? (
                     <img
                       src={m.image}

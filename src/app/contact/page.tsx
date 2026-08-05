@@ -15,7 +15,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Mindle — product inquiries, services, and partnerships.",
+    "Get in touch with Mindle product inquiries, services, and partnerships.",
 };
 
 const socials = [
@@ -32,7 +32,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title={
           <>
-            Let&apos;s <span className="text-gradient">talk</span>
+            Let&apos;s <span className="text-accent">talk</span>
           </>
         }
         description="Product questions, project ideas, partnerships we read everything and reply fast."
@@ -43,40 +43,40 @@ export default function ContactPage() {
           {/* Info column */}
           <Reveal>
             <div className="flex h-full flex-col gap-4">
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                   <Mail className="h-5 w-5" />
                 </span>
-                <h2 className="mt-4 font-display text-base font-bold">Email us</h2>
+                <h2 className="mt-4 font-display text-base font-semibold">Email us</h2>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="mt-1 inline-block text-sm font-medium text-primary hover:underline"
+                  className="mt-1 inline-block text-sm font-medium text-accent hover:underline"
                 >
                   {siteConfig.email}
                 </a>
               </div>
 
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                   <MapPin className="h-5 w-5" />
                 </span>
-                <h2 className="mt-4 font-display text-base font-bold">Where we are</h2>
+                <h2 className="mt-4 font-display text-base font-semibold">Where we are</h2>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  Pune, India · Remote-first
+                  CTS NO 1487;SR NO 77/1A MUNDHWA POWER ONE;SHOP O 406 411036, Pune, Maharashtra, Indiaver
                 </p>
               </div>
 
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary">
+              <div className="rounded-2xl border border-border bg-card p-6">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                   <Clock className="h-5 w-5" />
                 </span>
-                <h2 className="mt-4 font-display text-base font-bold">Response time</h2>
+                <h2 className="mt-4 font-display text-base font-semibold">Response time</h2>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   Usually within one business day.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 rounded-3xl border border-border bg-card p-7">
+              <div className="flex items-center gap-2 rounded-2xl border border-border bg-card p-6">
                 {socials.map((s) => (
                   <a
                     key={s.label}

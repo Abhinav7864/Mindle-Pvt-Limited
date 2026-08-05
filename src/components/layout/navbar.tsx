@@ -135,7 +135,6 @@ function MegaMenu({ type }: { type: string }) {
             <div className="mt-0.5 flex-1">
               <div className="flex items-center gap-2">
                 <span className="font-display text-sm font-semibold">{p.label}</span>
-                <StatusBadge status={p.status} />
               </div>
               <p className="mt-1 text-sm text-muted-foreground">{p.description}</p>
             </div>

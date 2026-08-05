@@ -34,6 +34,7 @@ export interface ProductStat {
 export interface ProductScreenshot {
   title: string;
   caption: string;
+  image?: string;
 }
 
 export interface Product {
@@ -92,7 +93,7 @@ export const products: Product[] = [
         icon: HeartPulse,
         title: "Mood-Based Verse Recommendation",
         description:
-          "A three-step emotional check-in with an animated pleasantness slider maps how you feel to the most relevant Gita verse for the day — saved locally and to the cloud.",
+          "A three-step emotional check-in with an animated pleasantness slider maps how you feel to the most relevant Gita verse for the day  saved locally and to the cloud.",
       },
       {
         icon: Clapperboard,
@@ -128,13 +129,13 @@ export const products: Product[] = [
         icon: Languages,
         title: "Eleven Indian Languages",
         description:
-          "English, Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, and Odia — the mentor replies in your chosen tongue every time.",
+          "English, Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, and Odia the mentor replies in your chosen tongue every time.",
       },
       {
         icon: CloudOff,
         title: "Offline-First Architecture",
         description:
-          "Every action writes to on-device storage instantly and syncs to the cloud via a retry-safe scheduler — full functionality with or without a connection.",
+          "Every action writes to on-device storage instantly and syncs to the cloud via a retry-safe scheduler full functionality with or without a connection.",
       },
     ],
     stats: [
@@ -144,10 +145,10 @@ export const products: Product[] = [
       { label: "Analytics window", value: 90, suffix: "-day" },
     ],
     screenshots: [
-      { title: "Home & Mantra Library", caption: "Day-based deity mantras with the digital Jaap counter." },
-      { title: "AI Spiritual Mentor", caption: "Verse-context chat, language-locked and anti-hallucination." },
-      { title: "Mood → Verse", caption: "Animated pleasantness slider maps feeling to scripture." },
-      { title: "Spiritual Analytics", caption: "90-day mood, reading, and Jaap trends." },
+      { title: "Home & Mantra Library", caption: "Day-based deity mantras with the digital Jaap counter.", image: "/Photo3.png" },
+      { title: "AI Spiritual Mentor", caption: "Verse-context chat, language-locked and anti-hallucination.", image: "/Photo2.png" },
+      { title: "Mood → Verse", caption: "Animated pleasantness slider maps feeling to scripture.", image: "/Photo1.png" },
+      { title: "Spiritual Analytics", caption: "90-day mood, reading, and Jaap trends.", image: "/Photo.png" },
     ],
     faq: [
       {
@@ -171,7 +172,7 @@ export const products: Product[] = [
         a: "GitaConnect is currently in Beta on iOS and patent-pending. Join the waitlist to get early access and updates.",
       },
     ],
-    cta: { label: "Join the GitaConnect beta", href: "/contact?product=gitaconnect" },
+    cta: { label: "Join the GitaConnect beta", href: "https://testflight.apple.com/join/ubbVX87p" },
   },
 ];
 

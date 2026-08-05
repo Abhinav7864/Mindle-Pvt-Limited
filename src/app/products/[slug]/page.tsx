@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProduct(slug);
   if (!product) return {};
   return {
-    title: `${product.name} — ${product.tagline}`,
+    title: `${product.name}  ${product.tagline}`,
     description: product.short,
     openGraph: { title: product.name, description: product.short },
   };
@@ -66,7 +66,6 @@ export default async function ProductPage({ params }: Props) {
                   <h1 className="font-display text-2xl font-bold tracking-tight">
                     {product.name}
                   </h1>
-                  <StatusBadge status={product.status} />
                 </div>
                 <p className="mt-0.5 text-sm text-muted-foreground">
                   {product.category} · {product.platform}
@@ -83,7 +82,11 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild variant="primary" size="lg">
-                <Link href={product.cta.href}>
+                <Link
+                  href={product.cta.href}
+                  target={product.cta.href.startsWith("http") ? "_blank" : undefined}
+                  rel={product.cta.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
                   {product.cta.label} <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -162,7 +165,7 @@ export default async function ProductPage({ params }: Props) {
           <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {product.features.map((f) => (
               <MotionItem key={f.title}>
-                <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/35">
+                <div className="h-full rounded-2xl border border-border bg-card p-6">
                   <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
                     <f.icon className="h-5 w-5" />
                   </span>
@@ -187,17 +190,22 @@ export default async function ProductPage({ params }: Props) {
             {product.screenshots.map((s, i) => (
               <MotionItem key={s.title}>
                 <figure className="group h-full overflow-hidden rounded-2xl border border-border bg-card">
-                  <div
-                    className="relative flex aspect-[4/5] items-center justify-center overflow-hidden"
-                    style={{
-                      background: `linear-gradient(${135 + i * 40}deg, ${product.gradient[0]}1f, ${product.gradient[1]}1f)`,
-                    }}
-                  >
-                    <div className="bg-dots absolute inset-0" />
-                    <Smartphone className="h-10 w-10 text-muted-foreground/40 transition-transform duration-500 group-hover:scale-110" />
-                    <span className="absolute bottom-3 right-3 rounded-full bg-card/80 px-2.5 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur">
-                      Preview coming soon
-                    </span>
+                  <div className="relative flex aspect-[9/18] items-center justify-center overflow-hidden bg-muted/40 p-2">
+                    {s.image ? (
+                      <img
+                        src={s.image}
+                        alt={s.title}
+                        className="h-full w-full object-contain rounded-xl transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <>
+                        <div className="bg-dots absolute inset-0" />
+                        <Smartphone className="h-10 w-10 text-muted-foreground/40 transition-transform duration-500 group-hover:scale-110" />
+                        <span className="absolute bottom-3 right-3 rounded-full bg-card/80 px-2.5 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur">
+                          Preview coming soon
+                        </span>
+                      </>
+                    )}
                   </div>
                   <figcaption className="p-4">
                     <p className="text-sm font-semibold">{s.title}</p>

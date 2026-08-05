@@ -24,19 +24,7 @@ export function Hero() {
 
       <div className="mx-auto grid w-full max-w-[1280px] items-center gap-16 px-6 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <motion.div variants={fadeUp} custom={0} initial="hidden" animate="visible">
-            <Link
-              href="/products/gitaconnect"
-              className="group inline-flex items-center gap-2 rounded-full border border-border bg-card/70 py-1.5 pl-2 pr-3.5 text-sm backdrop-blur transition-colors hover:border-primary/40"
-            >
-              <StatusBadge status="beta" />
-              <span className="text-muted-foreground">
-                GitaConnect is in beta —{" "}
-                <span className="font-medium text-foreground">meet it</span>
-              </span>
-              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
-            </Link>
-          </motion.div>
+
 
           <motion.h1
             variants={fadeUp}
@@ -45,9 +33,8 @@ export function Hero() {
             animate="visible"
             className="mt-6 font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl md:text-[4.25rem]"
           >
-            We build products{""}
-            <span className="text-accent inline-flex items-baseline">
-              <span className="animate-pulse mr-1">_</span>
+            We build products{" "}
+            <span className="text-accent">
               the future runs on
             </span>
           </motion.h1>
@@ -60,7 +47,7 @@ export function Hero() {
             className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
           >
             Mindle is a product-first  &amp; software company. We craft
-            intelligent SaaS platforms, mobile apps, and developer tools — and
+            intelligent SaaS platforms, mobile apps, and developer tools  and
             partner with ambitious teams to build theirs.
           </motion.p>
 
