@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Monitor } from "lucide-react";
+import {  Monitor } from "lucide-react";
 import { PageHeader } from "@/components/sections/page-header";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge } from "@/components/ui/badge";
@@ -86,7 +86,7 @@ export default function CaseStudiesPage() {
           <Reveal className="text-center">
             <Button asChild variant="ghost">
               <Link href="/contact">
-                 <ArrowRight className="h-4 w-4" />
+                 
               </Link>
             </Button>
           </Reveal>

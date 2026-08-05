@@ -19,10 +19,10 @@ export function FinalCTA({
   secondaryHref?: string;
 }) {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-8 sm:py-14 md:py-20">
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-surface-2 px-8 py-16 text-center md:px-16 md:py-24">
+          <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-surface-2 px-6 py-10 text-center md:px-16 md:py-24">
             <div className="absolute inset-0 bg-grid opacity-30" />
             <div className="relative">
               <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold tracking-tight text-balance sm:text-4xl md:text-5xl">

@@ -18,7 +18,7 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-20 pt-36 md:pb-28 md:pt-44">
+    <section className="relative overflow-hidden pb-8 pt-24 sm:pb-12 sm:pt-32 md:pb-16 md:pt-36">
       {/* Backdrop */}
       <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)] opacity-50" />
 
@@ -31,7 +31,7 @@ export function Hero() {
             custom={1}
             initial="hidden"
             animate="visible"
-            className="mt-6 font-display text-[2.75rem] font-extrabold leading-[1.05] tracking-tight text-balance sm:text-6xl md:text-[4.25rem]"
+            className="mt-4 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-balance sm:text-5xl md:text-[4.25rem]"
           >
             We build products{" "}
             <span className="text-accent">
@@ -44,7 +44,7 @@ export function Hero() {
             custom={2}
             initial="hidden"
             animate="visible"
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
             Mindle is a product-first  &amp; software company. We craft
             intelligent SaaS platforms, mobile apps, and developer tools  and
@@ -56,7 +56,7 @@ export function Hero() {
             custom={3}
             initial="hidden"
             animate="visible"
-            className="mt-9 flex flex-wrap items-center gap-4"
+            className="mt-7 flex flex-wrap items-center gap-3.5"
           >
             <Button asChild variant="primary" size="lg">
               <Link href="/products">
@@ -74,10 +74,10 @@ export function Hero() {
             custom={4}
             initial="hidden"
             animate="visible"
-            className="mt-10 flex items-center gap-3 text-sm text-muted-foreground"
+            className="mt-8 flex items-center gap-2.5 text-xs text-muted-foreground sm:text-sm"
           >
-            <Sparkles className="h-4 w-4 text-primary" />
-            Patent-pending AI · 11 Indian languages · Offline-first engineering
+            <Sparkles className="h-4 w-4 text-primary shrink-0" />
+            Patent-pending  · 11 Indian languages · Offline-first engineering
           </motion.div>
         </div>
 

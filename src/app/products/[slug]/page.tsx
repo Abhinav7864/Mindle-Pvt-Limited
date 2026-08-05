@@ -162,7 +162,7 @@ export default async function ProductPage({ params }: Props) {
             title={`Everything inside ${product.name}`}
             description={product.description}
           />
-          <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup className="mt-8 grid gap-3 grid-cols-2 lg:grid-cols-3">
             {product.features.map((f) => (
               <MotionItem key={f.title}>
                 <div className="h-full rounded-2xl border border-border bg-card p-6">
@@ -183,12 +183,12 @@ export default async function ProductPage({ params }: Props) {
       </section>
 
       {/* Screenshots */}
-      <section className="border-y border-border bg-[var(--surface-1)] py-24 md:py-32">
+      <section className="border-y border-border bg-[var(--surface-1)] py-8 sm:py-14 md:py-20">
         <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
           <SectionHeading eyebrow="Product" title="A look inside" />
-          <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="mt-8 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-none sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible sm:pb-0">
             {product.screenshots.map((s, i) => (
-              <MotionItem key={s.title}>
+              <MotionItem key={s.title} className="w-[240px] shrink-0 snap-center sm:w-auto">
                 <figure className="group h-full overflow-hidden rounded-2xl border border-border bg-card">
                   <div className="relative flex aspect-[9/18] items-center justify-center overflow-hidden bg-muted/40 p-2">
                     {s.image ? (

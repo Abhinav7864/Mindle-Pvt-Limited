@@ -7,20 +7,20 @@ import { personas, companyStats } from "@/lib/data/company";
 
 export function Metrics() {
   return (
-    <section className="py-24 md:py-28">
+    <section className="py-8 sm:py-14 md:py-20">
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <Reveal>
-          <div className="grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-3xl border border-border bg-border grid-cols-2 lg:grid-cols-4">
             {companyStats.map((s) => (
-              <div key={s.label} className="bg-card p-8 text-center">
-                <p className="font-display text-4xl font-extrabold tracking-tight md:text-5xl">
+              <div key={s.label} className="bg-card p-5 sm:p-8 text-center">
+                <p className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
                   <AnimatedCounter
                     value={s.value}
                     suffix={s.suffix ?? ""}
                     prefix={"prefix" in s ? (s.prefix as string) : ""}
                   />
                 </p>
-                <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
+                <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{s.label}</p>
               </div>
             ))}
           </div>
@@ -32,13 +32,13 @@ export function Metrics() {
 
 export function Personas() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-8 sm:py-14 md:py-20">
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <SectionHeading
           eyebrow="Who we build for"
           title="Built for the people building  "
         />
-        <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-8 grid gap-3 grid-cols-2 lg:grid-cols-4">
           {personas.map((p) => (
             <MotionItem key={p.title}>
               <div className="h-full rounded-2xl border border-border bg-card p-6 transition-colors hover:border-accent/35">

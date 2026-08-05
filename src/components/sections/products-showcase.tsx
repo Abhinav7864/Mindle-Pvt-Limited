@@ -11,7 +11,7 @@ import { products, featuredProduct, toCardData } from "@/lib/data/products";
 export function ProductsShowcase() {
   const rest = products.filter((p) => p.slug !== featuredProduct.slug);
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-8 sm:py-14 md:py-20">
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <SectionHeading
           eyebrow="Products"
@@ -24,11 +24,11 @@ export function ProductsShowcase() {
         />
 
         {/* Featured: GitaConnect */}
-        <Reveal className="mt-16">
+        <Reveal className="mt-10">
           <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-background shadow-sm">
             <div className="absolute inset-0 bg-dots opacity-40" />
 
-            <div className="relative grid items-center gap-12 p-8 md:p-14 lg:grid-cols-2">
+            <div className="relative grid items-center gap-8 p-6 md:p-14 lg:grid-cols-2">
               <div>
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -70,7 +70,7 @@ export function ProductsShowcase() {
                   </Button>
                 </div>
               </div>
-              <div className="mx-auto hidden lg:block">
+              <div className="mx-auto block mt-8 lg:mt-0 max-w-[280px] sm:max-w-[340px] lg:max-w-none">
                 <PhoneMockup />
               </div>
             </div>

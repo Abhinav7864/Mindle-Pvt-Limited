@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { mainNav, productMenu, serviceMenu } from "@/lib/data/nav";
@@ -37,7 +36,7 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border/50 bg-background/80 backdrop-blur-md shadow-sm"
+          ? "border-b border-border bg-background shadow-sm"
           : "border-b border-transparent bg-transparent"
       )}
       onMouseLeave={() => setOpenMenu(null)}
@@ -92,7 +91,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle className="hidden sm:grid" />
           <Button asChild variant="primary" size="sm" className="hidden sm:inline-flex">
             <Link href="/contact">Work With Us</Link>
           </Button>

@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { mainNav, productMenu } from "@/lib/data/nav";
 
@@ -42,73 +41,58 @@ export function MobileNav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] lg:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex flex-col bg-background p-6 lg:hidden overflow-y-auto"
           >
-            <div
-              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="absolute right-0 top-0 flex h-full w-[86%] max-w-sm flex-col overflow-y-auto border-l border-border bg-background p-6"
-            >
-              <div className="flex items-center justify-between">
-                <Logo />
-                <button
-                  type="button"
-                  aria-label="Close menu"
-                  onClick={() => setOpen(false)}
-                  className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card transition-colors hover:bg-muted"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+            <div className="flex items-center justify-between">
+              <Logo />
+              <button
+                type="button"
+                aria-label="Close menu"
+                onClick={() => setOpen(false)}
+                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card transition-colors hover:bg-muted"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
 
-              <nav className="mt-8 flex flex-col gap-1">
-                {mainNav.map((item) => (
+            <nav className="mt-8 flex flex-col gap-1">
+              {mainNav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-xl px-4 py-3 text-lg font-semibold transition-colors hover:bg-muted"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="mt-6">
+              <p className="px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Products
+              </p>
+              <div className="mt-2 flex flex-col gap-1">
+                {productMenu.map((p) => (
                   <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-xl px-4 py-3 text-lg font-medium transition-colors hover:bg-muted"
+                    key={p.href}
+                    href={p.href}
+                    className="flex items-center justify-between gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-muted"
                   >
-                    {item.label}
+                    <span className="text-sm font-medium">{p.label}</span>
                   </Link>
                 ))}
-              </nav>
-
-              <div className="mt-8">
-                <p className="px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Products
-                </p>
-                <div className="mt-2 flex flex-col gap-1">
-                  {productMenu.map((p) => (
-                    <Link
-                      key={p.href}
-                      href={p.href}
-                      className="flex items-center justify-between gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-muted"
-                    >
-                      <span className="text-sm font-medium">{p.label}</span>
-                    </Link>
-                  ))}
-                </div>
               </div>
+            </div>
 
-              <div className="mt-auto flex flex-col gap-3 pt-8">
-                <div className="flex items-center justify-between rounded-xl border border-border px-4 py-2">
-                  <span className="text-sm text-muted-foreground">Theme</span>
-                  <ThemeToggle />
-                </div>
-                <Button asChild variant="primary" size="lg">
-                  <Link href="/contact">Work With Us</Link>
-                </Button>
-              </div>
-            </motion.div>
+            <div className="mt-auto flex flex-col gap-3 pt-8">
+              <Button asChild variant="primary" size="lg">
+                <Link href="/contact">Work With Us</Link>
+              </Button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

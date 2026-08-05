@@ -4,7 +4,7 @@ export const siteConfig = {
   tagline: "Building the future, one product at a time.",
   description:
     "Mindle is a product-first  & software company building AI intelligent SaaS platforms, mobile apps, and developer tools starting with GitaConnect.",
-  url: "https://mindle.tech",
+  url: "https://mindle.in",
   email: "mindlepvtltd@gmail.com",
   locale: "en_US",
   keywords: [

@@ -8,7 +8,7 @@ import { MotionItem } from "@/components/sections/motion-item";
 
 export function ServicesStrip() {
   return (
-    <section className="border-y border-border bg-[var(--surface-1)] py-24 md:py-32">
+    <section className="border-y border-border bg-[var(--surface-1)] py-8 sm:py-14 md:py-20">
       <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
         <SectionHeading
           eyebrow="Services"
@@ -16,7 +16,7 @@ export function ServicesStrip() {
           description="Services fund our mission and you get product-grade craft on your build. Strategy to shipped, with the same care we put into our own portfolio."
         />
 
-        <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealGroup className="mt-8 grid gap-3 grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
             <MotionItem key={s.slug}>
               <div className="h-full rounded-2xl border border-border bg-card p-6">
