@@ -13,13 +13,16 @@ export async function POST(request: Request) {
     params.append("_subject", `[Mindle Contact] ${topic || "Inquiry"} - ${name || "Visitor"}`);
     params.append("_captcha", "false");
 
+    const origin = request.headers.get("origin") || "https://mindle.in";
+    const referer = request.headers.get("referer") || "https://mindle.in/";
+
     const res = await fetch("https://formsubmit.co/ajax/b1d1473a4f2295640caeb8949e97fa3c", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Accept: "application/json",
-        Referer: "http://localhost:3000/",
-        Origin: "http://localhost:3000",
+        Referer: referer,
+        Origin: origin,
       },
       body: params.toString(),
     });
