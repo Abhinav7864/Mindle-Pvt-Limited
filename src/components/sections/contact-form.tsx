@@ -45,14 +45,27 @@ export function ContactForm() {
     const topic = formData.get("topic") as string;
     const message = formData.get("message") as string;
 
+    const params = new URLSearchParams();
+    params.append("name", name || "");
+    params.append("email", email || "");
+    params.append("topic", topic || "");
+    params.append("message", message || "");
+    params.append("_subject", `[Mindle Contact] ${topic || "Inquiry"} - ${name || "Visitor"}`);
+    params.append("_captcha", "false");
+
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("https://formsubmit.co/ajax/b1d1473a4f2295640caeb8949e97fa3c", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
         },
-        body: JSON.stringify({ name, email, topic, message }),
+        body: params.toString(),
       });
+      const data = await res.json();
+      if (!data.success) {
+        console.error("FormSubmit Error:", data);
+      }
     } catch (err) {
       console.error("Form submission error:", err);
     } finally {
