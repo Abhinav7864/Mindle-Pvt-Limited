@@ -1,8 +1,6 @@
 import Link from "next/link";
 import {
-  XIcon,
   LinkedInIcon,
-  GitHubIcon,
   InstagramIcon,
 } from "@/components/ui/social-icons";
 import { Logo } from "@/components/ui/logo";
@@ -11,10 +9,8 @@ import { footerNav } from "@/lib/data/nav";
 import { siteConfig } from "@/lib/site";
 
 const socials = [
-  { icon: XIcon, href: siteConfig.social.twitter, label: "X (Twitter)" },
-  { icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
-  { icon: GitHubIcon, href: siteConfig.social.github, label: "GitHub" },
   { icon: InstagramIcon, href: siteConfig.social.instagram, label: "Instagram" },
+  { icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
 ];
 
 export function Footer() {

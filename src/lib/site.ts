@@ -18,10 +18,8 @@ export const siteConfig = {
     "machine learning",
   ],
   social: {
-    twitter: "https://twitter.com/mindlehq",
-    linkedin: "https://www.linkedin.com/company/mindle",
-    github: "https://github.com/mindle",
-    instagram: "https://instagram.com/mindlehq",
+    instagram: "https://www.instagram.com/mindlepvtltd/",
+    linkedin: "https://www.linkedin.com/company/mindlepvtltd/?viewAsMember=true",
   },
 };
 

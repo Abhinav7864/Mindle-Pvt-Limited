@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Mail, MapPin, Clock } from "lucide-react";
 import {
-  XIcon,
   LinkedInIcon,
-  GitHubIcon,
   InstagramIcon,
 } from "@/components/ui/social-icons";
 import { PageHeader } from "@/components/sections/page-header";
@@ -19,10 +17,8 @@ export const metadata: Metadata = {
 };
 
 const socials = [
-  { icon: XIcon, href: siteConfig.social.twitter, label: "X (Twitter)" },
-  { icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
-  { icon: GitHubIcon, href: siteConfig.social.github, label: "GitHub" },
   { icon: InstagramIcon, href: siteConfig.social.instagram, label: "Instagram" },
+  { icon: LinkedInIcon, href: siteConfig.social.linkedin, label: "LinkedIn" },
 ];
 
 export default function ContactPage() {
