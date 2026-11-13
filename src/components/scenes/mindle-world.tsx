@@ -178,16 +178,16 @@ function TransformationPlates({ progress, reducedMotion }: { progress: number; r
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  // Enters as Chapter 01 ember guides expand (0.07 -> 0.11)
-  const arrival = smoothstep(0.07, 0.11, progress);
-  // Fades out completely BEFORE reaching the telemetry stats strip (0.13 -> 0.16)
-  // This guarantees 100% clean, pristine negative space for all 4 stats on BOTH mobile and desktop!
-  const departure = 1 - smoothstep(0.13, 0.16, progress);
+  // Enters as Chapter 01 ember guides expand (0.07 -> 0.12)
+  const arrival = smoothstep(0.07, 0.12, progress);
+  // Seamlessly transitions into GitaConnect celestial geometry (0.20 -> 0.26)
+  const departure = 1 - smoothstep(0.20, 0.26, progress);
   const opacity = arrival * departure;
 
-  // As user moves toward the 3 principle cards, plates recede into depth and right
-  const statsAvoidance = smoothstep(0.11, 0.15, progress);
-  const morphToCh3 = smoothstep(0.12, 0.16, progress);
+  // As user moves into the 3 principle cards and stats, plates recede deep into background (z: -0.2 -> -5.5)
+  // and tuck safely to the far right (x: 2.5 -> 2.8), ensuring 100% negative space for text & metrics!
+  const statsAvoidance = smoothstep(0.14, 0.21, progress);
+  const morphToCh3 = smoothstep(0.16, 0.25, progress);
 
   useFrame((state) => {
     if (!plateGroup.current || opacity <= 0.001) return;
@@ -198,18 +198,19 @@ function TransformationPlates({ progress, reducedMotion }: { progress: number; r
     const baseRotY = -0.48 + Math.sin(t * 0.05) * 0.04 + (reducedMotion ? 0 : ptr.x * 0.04);
     const baseRotX = 0.44 + Math.cos(t * 0.04) * 0.02 + (reducedMotion ? 0 : ptr.y * 0.03);
 
-    plateGroup.current.rotation.x = THREE.MathUtils.lerp(baseRotX, 0.25, statsAvoidance);
-    plateGroup.current.rotation.y = baseRotY;
-    plateGroup.current.rotation.z = THREE.MathUtils.lerp(0, 0.05, statsAvoidance);
+    // Eases smoothly towards Chapter 03 frontal celestial alignment (rotX -> 0, rotY -> 0)
+    plateGroup.current.rotation.x = THREE.MathUtils.lerp(baseRotX, 0, morphToCh3);
+    plateGroup.current.rotation.y = THREE.MathUtils.lerp(baseRotY, 0, morphToCh3);
+    plateGroup.current.rotation.z = THREE.MathUtils.lerp(0, t * 0.03, morphToCh3);
 
-    // Guaranteed negative space: Keep strictly on the right side (x >= 2.5) and recede into depth (-6.0)
-    const targetX = isMobile ? 0 : THREE.MathUtils.lerp(2.5, 2.9, statsAvoidance);
-    const targetY = isMobile ? THREE.MathUtils.lerp(0.2, 0.5, statsAvoidance) : THREE.MathUtils.lerp(0.2, 0.85, statsAvoidance);
-    const targetZ = isMobile ? THREE.MathUtils.lerp(-1.0, -4.5, statsAvoidance) : THREE.MathUtils.lerp(-0.2, -6.0, statsAvoidance);
+    // Guaranteed negative space: Keep strictly on the far right (x >= 2.5) and recede into deep depth (-5.5)
+    const targetX = isMobile ? 0 : THREE.MathUtils.lerp(2.5, 2.8, statsAvoidance);
+    const targetY = isMobile ? THREE.MathUtils.lerp(0.2, 0.5, statsAvoidance) : THREE.MathUtils.lerp(0.2, 0.65, statsAvoidance);
+    const targetZ = isMobile ? THREE.MathUtils.lerp(-1.0, -4.5, statsAvoidance) : THREE.MathUtils.lerp(-0.2, -5.5, statsAvoidance);
 
     plateGroup.current.position.set(targetX, targetY, targetZ);
 
-    const scale = (isMobile ? 0.6 : 0.9) * THREE.MathUtils.lerp(1.0, 0.45, statsAvoidance);
+    const scale = (isMobile ? 0.6 : 0.9) * THREE.MathUtils.lerp(1.0, 0.5, statsAvoidance);
     plateGroup.current.scale.setScalar(scale);
   });
 
@@ -282,12 +283,17 @@ function GitaHeritageEnvironment({
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.20, 0.25, progress);
-  const departure = 1 - smoothstep(0.39, 0.44, progress);
+  // Arrives smoothly from the deep background plates (0.20 -> 0.28)
+  const arrival = smoothstep(0.20, 0.28, progress);
+  // Endures as background frame during Panchatantra arrival (0.40 -> 0.46)
+  const departure = 1 - smoothstep(0.40, 0.46, progress);
   const opacity = arrival * departure;
 
-  // Smooth transition to Panchatantra AI: Yantra tilts back into depth (z: -0.8 -> -2.6)
-  const panchatantraBackdrop = smoothstep(0.38, 0.44, progress);
+  // Depth glide: starts in deep background (-4.2) during stats, glides forward to -0.8 behind phone mockup
+  const depthGlide = smoothstep(0.20, 0.29, progress);
+
+  // Smooth transition to Panchatantra AI: Yantra tilts back into depth (z: -0.8 -> -2.2)
+  const panchatantraBackdrop = smoothstep(0.38, 0.45, progress);
 
   const featureRotations = useMemo(
     () => [
@@ -328,15 +334,15 @@ function GitaHeritageEnvironment({
       );
     }
 
-    // Position: perfectly centered behind the phone showcase at x=2.3
-    // Tilts backward into depth during Panchatantra arrival (z: -0.8 -> -2.6)
+    // Position: glides from deep background (-4.2) to midground (-0.8), then tilts into backdrop (-2.2)
     const posX = isMobile ? 0 : 2.3;
-    const posY = THREE.MathUtils.lerp(0.0, -0.1, panchatantraBackdrop);
-    const posZ = THREE.MathUtils.lerp(-0.8, -2.6, panchatantraBackdrop);
+    const forwardZ = THREE.MathUtils.lerp(-4.2, -0.8, depthGlide);
+    const posZ = THREE.MathUtils.lerp(forwardZ, -2.2, panchatantraBackdrop);
+    const posY = THREE.MathUtils.lerp(0.2, 0.0, depthGlide);
     gitaGroup.current.position.set(posX, posY, posZ);
 
     // Subtle pitch into backdrop orientation
-    gitaGroup.current.rotation.x = THREE.MathUtils.lerp(0, 0.35, panchatantraBackdrop);
+    gitaGroup.current.rotation.x = THREE.MathUtils.lerp(0, 0.25, panchatantraBackdrop);
 
     if (warmPedestalLight.current) {
       warmPedestalLight.current.intensity = 6 * opacity * (1 - panchatantraBackdrop * 0.4);
@@ -422,12 +428,12 @@ function PanchatantraFolkloreWorld({ progress, reducedMotion }: { progress: numb
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.39, 0.44, progress);
-  const departure = 1 - smoothstep(0.49, 0.53, progress);
+  const arrival = smoothstep(0.38, 0.44, progress);
+  const departure = 1 - smoothstep(0.50, 0.55, progress);
   const opacity = arrival * departure;
 
   // Morph to Chapter 04 computational octahedron
-  const morphToCh4 = smoothstep(0.48, 0.53, progress);
+  const morphToCh4 = smoothstep(0.48, 0.54, progress);
 
   useFrame((state) => {
     if (!dioramaGroup.current || opacity <= 0.001) return;
@@ -514,12 +520,12 @@ function ComputationalLattice({
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.50, 0.54, progress);
-  const departure = 1 - smoothstep(0.66, 0.70, progress);
+  const arrival = smoothstep(0.48, 0.54, progress);
+  const departure = 1 - smoothstep(0.68, 0.74, progress);
   const opacity = arrival * departure;
 
   // Morph to Chapter 05 floor horizon ribbon
-  const morphToCh5 = smoothstep(0.65, 0.70, progress);
+  const morphToCh5 = smoothstep(0.66, 0.74, progress);
 
   const targets = useMemo(
     () => [
@@ -618,28 +624,69 @@ function ComputationalLattice({
 }
 
 /**
- * 6. CHAPTER 05 — THE STUDIO: MINIMALIST REFLECTIVE HORIZON
- * Active: p in [0.77, 0.93].
- * Completely calm, grounded reflective horizon plane at floor level (y = -2.4).
- * ZERO competing geometry behind the founder portraits.
+ * 6. CHAPTER 05 — THE STUDIO: MINIMALIST REFLECTIVE HORIZON & ARCHITECTURAL FOUNDATION
+ * Active: p in [0.66, 0.95].
+ * The Chapter 04 equatorial ring settles onto the floor datum as a glowing horizon ribbon.
+ * Dormant pillar guide foundations hint at the upcoming monolith gateway at x = -1.8 and +1.8.
+ * Warm, quiet, human-centered studio lighting frames the founder portraits.
  */
 function StudioAtmosphere({ progress }: { progress: number }) {
-  const arrival = smoothstep(0.68, 0.73, progress);
-  const departure = 1 - smoothstep(0.89, 0.93, progress);
+  const arrival = smoothstep(0.66, 0.74, progress);
+  const departure = 1 - smoothstep(0.91, 0.96, progress);
   const opacity = arrival * departure;
+
+  // Morph to Chapter 06 monolith gateway
+  const morphToCh6 = smoothstep(0.88, 0.95, progress);
 
   if (opacity <= 0.001) return null;
 
   return (
     <group position={[0, -2.4, 0]}>
+      {/* Reflective Dark Floor Datum */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[24, 6]} />
+        <planeGeometry args={[26, 8]} />
         <meshPhysicalMaterial
           color="#080808"
-          roughness={0.5}
-          metalness={0.8}
+          roughness={0.38}
+          metalness={0.88}
           transparent
-          opacity={opacity * 0.55}
+          opacity={opacity * 0.65}
+        />
+      </mesh>
+
+      {/* Luminous Studio Horizon Ribbon (born from Chapter 04 equatorial ring) */}
+      <mesh position={[0, 0.02, 0]}>
+        <boxGeometry args={[24, 0.03, 0.08]} />
+        <meshStandardMaterial
+          color="#ffffff"
+          emissive="#ffffff"
+          emissiveIntensity={0.45 * (1 - morphToCh6)}
+          transparent
+          opacity={opacity * 0.75}
+        />
+      </mesh>
+
+      {/* Architectural Pillar Foundation Blocks framing the right column gateway */}
+      <mesh position={[1.5, THREE.MathUtils.lerp(0.05, 0.35, morphToCh6), 0]}>
+        <boxGeometry args={[0.26, THREE.MathUtils.lerp(0.1, 0.7, morphToCh6), 0.38]} />
+        <meshPhysicalMaterial
+          color="#0c0c0c"
+          metalness={0.96}
+          roughness={0.1}
+          clearcoat={1}
+          transparent
+          opacity={opacity * 0.85}
+        />
+      </mesh>
+      <mesh position={[3.3, THREE.MathUtils.lerp(0.05, 0.35, morphToCh6), 0]}>
+        <boxGeometry args={[0.26, THREE.MathUtils.lerp(0.1, 0.7, morphToCh6), 0.38]} />
+        <meshPhysicalMaterial
+          color="#0c0c0c"
+          metalness={0.96}
+          roughness={0.1}
+          clearcoat={1}
+          transparent
+          opacity={opacity * 0.85}
         />
       </mesh>
     </group>
@@ -647,15 +694,21 @@ function StudioAtmosphere({ progress }: { progress: number }) {
 }
 
 /**
- * 7. CHAPTER 06 — THE CONNECTION: ARCHITECTURAL PORTAL GATEWAY
- * Active: p in [0.90, 1.00].
- * Twin monolithic obsidian pillars rise from the floor plane and stand tall,
- * framing the central call-to-action without touching text.
- * Subtle, stately rotation: t * 0.03 rad/sec.
+ * 7. CHAPTER 06 — THE CONNECTION: ARCHITECTURAL PORTAL GATEWAY & CORE SPARK
+ * Active: p in [0.89, 1.00].
+ * Twin monolithic obsidian pillars rise from the Chapter 05 foundation blocks at x = -1.8 and +1.8.
+ * In the center, a radiant portal of light ignites—echoing the incandescent core of the
+ * Chapter 01 Emergence spark, completing the philosophical circle of the journey.
+ * Stately turntable rotation: t * 0.03 rad/sec.
  */
 function ArchitecturalGateway({ progress, reducedMotion }: { progress: number; reducedMotion?: boolean }) {
   const gateGroup = useRef<THREE.Group>(null);
-  const arrival = smoothstep(0.90, 0.94, progress);
+  const coreMesh = useRef<THREE.Mesh>(null);
+  const portalHalo = useRef<THREE.Mesh>(null);
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 5.5;
+
+  const arrival = smoothstep(0.89, 0.95, progress);
   const opacity = arrival;
 
   useFrame((state) => {
@@ -663,31 +716,69 @@ function ArchitecturalGateway({ progress, reducedMotion }: { progress: number; r
     const t = state.clock.getElapsedTime();
     const ptr = state.pointer;
 
-    // Slow, stately rotation (KEEP THE SPINNING, at 1.7 deg/sec)
+    // Slow, stately rotation (KEEP THE SPINNING at ~1.7 deg/sec)
     gateGroup.current.rotation.y = t * 0.03 + (reducedMotion ? 0 : ptr.x * 0.04);
 
-    // Pillars rise up smoothly from floor level (-2.4 -> 0.1)
+    // Pillars rise up smoothly from studio floor foundation (-2.4 -> 0.1)
     const riseY = THREE.MathUtils.lerp(-2.4, 0.1, arrival);
     gateGroup.current.position.y = riseY;
 
-    // Scale grows from floor thickness to full pillar height
+    // Scale grows from foundation height to full pillar height
     gateGroup.current.scale.set(1, arrival, 1);
+
+    // Central portal breathing pulse (mirroring Chapter 01 Emergence spark!)
+    if (coreMesh.current) {
+      const breathe = 1 + Math.sin(t * 1.4) * 0.04;
+      coreMesh.current.scale.setScalar(breathe);
+    }
+    if (portalHalo.current) {
+      portalHalo.current.rotation.z = -t * 0.04;
+    }
   });
 
   if (opacity <= 0.001) return null;
 
   return (
-    <group ref={gateGroup} position={[0, 0.1, 0]}>
-      {/* Symmetrically positioned at x = -1.8 and +1.8 to frame the central text block */}
-      <mesh position={[-1.8, 0, 0]}>
-        <boxGeometry args={[0.3, 2.6, 0.4]} />
-        <meshPhysicalMaterial color="#0c0c0c" metalness={0.95} roughness={0.08} clearcoat={1} transparent opacity={opacity} />
+    <group ref={gateGroup} position={[isMobile ? 0 : 2.4, 0.1, isMobile ? -2.5 : 0]}>
+      {/* Symmetrically positioned twin monolith pillars framing the portal on the right column */}
+      <mesh position={[-0.9, 0, 0]}>
+        <boxGeometry args={[0.26, 2.6, 0.38]} />
+        <meshPhysicalMaterial color="#0c0c0c" metalness={0.96} roughness={0.08} clearcoat={1} transparent opacity={opacity} />
       </mesh>
-      <mesh position={[1.8, 0, 0]}>
-        <boxGeometry args={[0.3, 2.6, 0.4]} />
-        <meshPhysicalMaterial color="#0c0c0c" metalness={0.95} roughness={0.08} clearcoat={1} transparent opacity={opacity} />
+      <mesh position={[0.9, 0, 0]}>
+        <boxGeometry args={[0.26, 2.6, 0.38]} />
+        <meshPhysicalMaterial color="#0c0c0c" metalness={0.96} roughness={0.08} clearcoat={1} transparent opacity={opacity} />
       </mesh>
-      <pointLight position={[0, 0, 0.5]} color="#ffffff" distance={8} intensity={5 * opacity} />
+
+      {/* Central Incandescent Portal of Light (echoing Chapter 01 spark) */}
+      <group position={[0, 0.1, 0.4]}>
+        <mesh ref={coreMesh}>
+          <sphereGeometry args={[0.26, 32, 32]} />
+          <meshStandardMaterial
+            color="#fffdf0"
+            emissive="#ffffff"
+            emissiveIntensity={2.8 * opacity}
+            transparent
+            opacity={opacity}
+          />
+        </mesh>
+
+        {/* Orbiting smoky obsidian ring */}
+        <mesh ref={portalHalo}>
+          <torusGeometry args={[0.62, 0.018, 16, 48]} />
+          <meshPhysicalMaterial
+            color="#181816"
+            metalness={0.9}
+            roughness={0.1}
+            clearcoat={1}
+            transmission={0.5}
+            transparent
+            opacity={opacity * 0.85}
+          />
+        </mesh>
+
+        <pointLight position={[0, 0, 0.2]} color="#ffffff" distance={8} intensity={6 * opacity} />
+      </group>
     </group>
   );
 }
@@ -697,16 +788,18 @@ function ArchitecturalGateway({ progress, reducedMotion }: { progress: number; r
  * Continuous cross-fading of chapter lighting moods without abrupt flashes.
  */
 function ContinuousLighting({ progress }: { progress: number }) {
-  const gitaLight = smoothstep(0.26, 0.31, progress) * (1 - smoothstep(0.39, 0.44, progress));
-  const panchaLight = smoothstep(0.39, 0.44, progress) * (1 - smoothstep(0.49, 0.54, progress));
-  const craftLight = smoothstep(0.50, 0.55, progress) * (1 - smoothstep(0.66, 0.71, progress));
+  const gitaLight = smoothstep(0.22, 0.30, progress) * (1 - smoothstep(0.38, 0.46, progress));
+  const panchaLight = smoothstep(0.38, 0.45, progress) * (1 - smoothstep(0.48, 0.55, progress));
+  const craftLight = smoothstep(0.48, 0.55, progress) * (1 - smoothstep(0.66, 0.74, progress));
+  const studioLight = smoothstep(0.66, 0.74, progress) * (1 - smoothstep(0.88, 0.94, progress));
+  const portalLight = smoothstep(0.88, 0.95, progress);
 
   return (
     <>
-      <ambientLight intensity={0.16} />
+      <ambientLight intensity={0.16 + studioLight * 0.08} />
       <spotLight
         position={[6, 8, 7]}
-        intensity={54}
+        intensity={48}
         angle={0.42}
         penumbra={0.9}
         color="#ffffff"
@@ -719,6 +812,10 @@ function ContinuousLighting({ progress }: { progress: number }) {
       <pointLight position={[3, 0, 3]} intensity={panchaLight * 26} distance={10} color="#10b981" />
       {/* Cool Specular Blue Spot for The Craft */}
       <spotLight position={[4, 6, 5]} intensity={craftLight * 32} angle={0.48} penumbra={0.8} color="#93c5fd" />
+      {/* Warm Diffuse Studio Fill */}
+      <pointLight position={[0, 4, 3]} intensity={studioLight * 22} distance={12} color="#ffe8d6" />
+      {/* Incandescent Portal Radiance on right column */}
+      <pointLight position={[2.4, 0.1, 1]} intensity={portalLight * 38} distance={10} color="#ffffff" />
     </>
   );
 }
