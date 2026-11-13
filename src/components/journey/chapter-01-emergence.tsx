@@ -53,7 +53,7 @@ export function Chapter01Emergence({ onExplore, onSkipIntro, isIntroComplete }: 
 
       {/* Main Editorial Hero & Official Logo Reveal */}
       <div className="my-auto max-w-[820px] py-10">
-        {/* Official Mindle Emblem Reveal: Exact Vector Master from public/logo.svg */}
+        {/* Official Mindle Brandmark Reveal from Mindle_Separate_Logo_Assets */}
         <motion.div
           variants={reveal}
           custom={reducedMotion ? 0 : 0.12}
@@ -61,45 +61,26 @@ export function Chapter01Emergence({ onExplore, onSkipIntro, isIntroComplete }: 
           animate="visible"
           className="flex items-center gap-4 mb-8"
         >
-          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-white/15 bg-black/60 p-1.5 shadow-[0_0_24px_rgba(255,255,255,0.08)] backdrop-blur-md">
-            {/* Exact SVG Brandmark */}
-            <svg viewBox="0 0 100 100" className="h-full w-full" aria-label="Official Mindle Brandmark">
-              <defs>
-                <linearGradient id="c1LeftGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#040b1c" />
-                  <stop offset="100%" stopColor="#0e2a6d" />
-                </linearGradient>
-                <linearGradient id="c1RightGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#0066FF" />
-                  <stop offset="100%" stopColor="#00D2FF" />
-                </linearGradient>
-                <linearGradient id="c1LeftDiag" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#0e2a6d" />
-                  <stop offset="100%" stopColor="#1e52b7" />
-                </linearGradient>
-                <linearGradient id="c1RightDiag" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#0052D4" />
-                  <stop offset="100%" stopColor="#00D2FF" />
-                </linearGradient>
-                <filter id="c1FoldShadow" x="-30%" y="-30%" width="160%" height="160%">
-                  <feDropShadow dx="-1.2" dy="1.2" stdDeviation="1" floodColor="#000" floodOpacity="0.5" />
-                </filter>
-              </defs>
-              <rect x="15" y="20" width="14" height="60" rx="7" fill="url(#c1LeftGrad)" />
-              <path d="M 22,35 L 50,68" stroke="url(#c1LeftDiag)" strokeWidth="14" strokeLinecap="round" />
-              <path d="M 50,68 L 78,35" stroke="url(#c1RightDiag)" strokeWidth="14" strokeLinecap="round" filter="url(#c1FoldShadow)" />
-              <rect x="71" y="20" width="14" height="60" rx="7" fill="url(#c1RightGrad)" />
-            </svg>
+          {/* Authentic Mindle App Icon / Brandmark */}
+          <div className="relative h-13 w-13 shrink-0 overflow-hidden rounded-2xl border border-white/15 bg-black/80 shadow-[0_0_24px_rgba(255,255,255,0.08)] backdrop-blur-md">
+            <Image
+              src="/brand/09_Mindle_App_Icon_Black_1024.png"
+              alt="Official Mindle Brandmark"
+              width={1024}
+              height={1024}
+              priority
+              className="h-full w-full object-cover"
+            />
           </div>
 
           <div>
             <Image
-              src="/mindle-wordmark-white.png"
+              src="/brand/01_Mindle_Primary_White_Transparent.png"
               alt="Mindle"
               width={160}
               height={38}
               priority
-              className="h-6 w-auto object-contain opacity-90"
+              className="h-6 w-auto object-contain opacity-95"
             />
             <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.24em] text-white/45">
               Autonomous Product Studio
