@@ -86,7 +86,7 @@ export function Chapter04Craft({
           </div>
 
           {/* Live Engineering Blueprint Display */}
-          <div className="rounded-2xl border border-white/[0.12] bg-black/60 p-8 backdrop-blur-xl md:p-12">
+          <div className="rounded-2xl border border-white/[0.12] bg-black/25 p-8 backdrop-blur-md md:p-12 transition-all duration-500 hover:border-white/20">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08] pb-6">
               <div className="flex items-center gap-3">
                 <Terminal className="h-4 w-4 text-white/50" />

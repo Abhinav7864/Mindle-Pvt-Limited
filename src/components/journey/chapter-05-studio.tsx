@@ -55,7 +55,7 @@ export function Chapter05Studio() {
             {team.map((member) => (
               <Reveal
                 key={member.name}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-black/50 backdrop-blur-xl transition-all duration-500 hover:border-white/30"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-black/25 backdrop-blur-md transition-all duration-500 hover:border-white/30"
               >
                 {/* Photo Portrait */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#161616]">

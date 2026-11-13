@@ -73,7 +73,7 @@ export function Chapter02Transformation() {
           {principles.map((item) => (
             <Reveal
               key={item.num}
-              className="relative flex flex-col justify-between rounded-xl border border-white/[0.08] bg-black/40 p-8 backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:bg-black/60"
+              className="relative flex flex-col justify-between rounded-xl border border-white/[0.08] bg-black/20 p-8 backdrop-blur-md transition-all duration-300 hover:border-white/25 hover:bg-black/40"
             >
               <div>
                 <span className="font-mono text-[11px] uppercase tracking-[0.24em] text-white/35">

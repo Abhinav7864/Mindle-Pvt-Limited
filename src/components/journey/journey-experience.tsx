@@ -2,7 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useReducedMotion } from "framer-motion";
 import { Chapter01Emergence } from "./chapter-01-emergence";
 import { Chapter02Transformation } from "./chapter-02-transformation";
 import { Chapter03ProductUniverse } from "./chapter-03-product-universe";
@@ -37,31 +39,49 @@ export function JourneyExperience() {
   const [progress, setProgress] = useState(0);
   const [activeChapter, setActiveChapter] = useState(1);
   const [craftIndex, setCraftIndex] = useState(0);
+  const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
   const [isIntroComplete, setIsIntroComplete] = useState(false);
   const reducedMotion = useReducedMotion() ?? false;
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  // Master GSAP ScrollTrigger Timeline
+  useEffect(() => {
+    if (typeof window === "undefined" || !containerRef.current) return;
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const clamped = Math.max(0, Math.min(1, latest));
-    setProgress(clamped);
+    gsap.registerPlugin(ScrollTrigger);
 
-    // Calculate active chapter based on progress brackets
-    if (clamped < 0.18) setActiveChapter(1);
-    else if (clamped < 0.38) setActiveChapter(2);
-    else if (clamped < 0.62) setActiveChapter(3);
-    else if (clamped < 0.80) setActiveChapter(4);
-    else if (clamped < 0.92) setActiveChapter(5);
-    else setActiveChapter(6);
-  });
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.1, // 100ms lag-free damping, preserves native scrolling & keyboard navigation
+        onUpdate: (self) => {
+          const p = Math.max(0, Math.min(1, self.progress));
+          setProgress(p);
+
+          // Hysteresis-aware chapter tracking
+          if (p < 0.18) setActiveChapter(1);
+          else if (p < 0.38) setActiveChapter(2);
+          else if (p < 0.62) setActiveChapter(3);
+          else if (p < 0.80) setActiveChapter(4);
+          else if (p < 0.92) setActiveChapter(5);
+          else setActiveChapter(6);
+        },
+      });
+    }, containerRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
 
   const scrollToChapter = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        ScrollTrigger.update();
+      }, 400);
     }
   };
 
@@ -79,6 +99,7 @@ export function JourneyExperience() {
           reducedMotion={reducedMotion}
           activeChapter={activeChapter}
           craftIndex={craftIndex}
+          activeFeatureIndex={activeFeatureIndex}
         />
         {/* Subtle cinematic gradient vignette & noise */}
         <div className="noise-overlay pointer-events-none absolute inset-0 z-[1] opacity-70" />
@@ -130,7 +151,7 @@ export function JourneyExperience() {
           isIntroComplete={isIntroComplete}
         />
         <Chapter02Transformation />
-        <Chapter03ProductUniverse />
+        <Chapter03ProductUniverse onFeatureChange={(idx) => setActiveFeatureIndex(idx)} />
         <Chapter04Craft onSelectDiscipline={(idx) => setCraftIndex(idx)} />
         <Chapter05Studio />
         <Chapter06Connection />

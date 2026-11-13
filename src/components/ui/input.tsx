@@ -8,6 +8,7 @@ export const Input = React.forwardRef<
   <input
     ref={ref}
     type={type}
+    suppressHydrationWarning
     className={cn(
       "flex h-11 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50",
       className
@@ -23,6 +24,7 @@ export const Textarea = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <textarea
     ref={ref}
+    suppressHydrationWarning
     className={cn(
       "flex min-h-[120px] w-full rounded-xl border border-input bg-background px-4 py-3 text-sm transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-50",
       className
