@@ -9,6 +9,10 @@ import {
   BarChart3,
   CloudOff,
   Languages,
+  BookOpen,
+  Bot,
+  ShieldCheck,
+  Volume2,
 } from "lucide-react";
 
 export type ProductStatus = "live" | "beta" | "coming-soon";
@@ -87,7 +91,7 @@ export const products: Product[] = [
         icon: Sparkles,
         title: "AI Spiritual Mentor",
         description:
-          "Powered by the Sarvam-30B model and a multi-rule prompt framework enforcing language-lock, tone calibration, anti-hallucination, and verse validation against a device-resident datastore.",
+          "Powered by domain-tuned LLM architectures and a multi-rule prompt framework enforcing language-lock, tone calibration, anti-hallucination, and verse validation against a device-resident datastore.",
       },
       {
         icon: HeartPulse,
@@ -173,6 +177,97 @@ export const products: Product[] = [
       },
     ],
     cta: { label: "Join the GitaConnect beta", href: "https://testflight.apple.com/join/ubbVX87p" },
+  },
+  {
+    slug: "panchatantra-ai",
+    name: "Panchatantra AI",
+    tagline: "Adaptive AI storytelling & moral reasoning platform for kids",
+    category: "AI · EdTech · Kids",
+    platform: "iOS · Android · Web",
+    status: "beta",
+    featured: false,
+    gradient: ["#10b981", "#3b82f6"],
+    short:
+      "An intelligent adaptive learning platform bringing ancient Indian wisdom to kids through interactive storytelling, moral reasoning, and AI tutors.",
+    description:
+      "Panchatantra AI bridges timeless Indian Knowledge Systems (IKS) with modern AI. Instead of passive reading, children experience age-adapted fables, dynamic moral dilemmas, interactive character chats, voice narration, and gamified comprehension challenges.",
+    hero: {
+      headline: "Ancient moral wisdom meets adaptive AI learning for kids.",
+      subhead:
+        "Transforming timeless Panchatantra fables into an interactive, voice-narrated educational experience with age-calibrated vocabulary, moral reasoning tutors, and educator dashboards.",
+    },
+    highlights: [
+      "Age-adaptive storytelling (Tiers for 4–8 & 9–14)",
+      "Authentic RAG story retrieval with zero hallucinations",
+      "Interactive 'What would you do?' moral reasoning engine",
+      "Kid-safe, COPPA-compliant & 100% ad-free",
+    ],
+    features: [
+      {
+        icon: BookOpen,
+        title: "Adaptive Vocabulary Tiers",
+        description:
+          "Dynamically adjusts language complexity, sentence structure, and conceptual depth based on the child's age group and reading progression.",
+      },
+      {
+        icon: Bot,
+        title: "Interactive AI Story Explainer",
+        description:
+          "Kids can ask questions in real-time ('Why did the rabbit outsmart the lion?') and receive safe, culturally grounded explanations.",
+      },
+      {
+        icon: Trophy,
+        title: "Moral Reasoning Engine",
+        description:
+          "Replaces preachy morals with active dilemmas ('What choice would you make here?'), teaching critical thinking and empathy.",
+      },
+      {
+        icon: Volume2,
+        title: "Voice Narration & Chanting",
+        description:
+          "Expressive multi-lingual voiceover with synchronized karaoke-style text highlighting for multi-sensory reading immersion.",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Parent & Educator Dashboard",
+        description:
+          "Institutional tracking for schools and cultural centers to monitor moral themes, reading streaks, and comprehension metrics.",
+      },
+      {
+        icon: Languages,
+        title: "Pan-Indian Languages",
+        description:
+          "Available across English, Hindi, and regional languages with dialect-aware pronunciation and culturally authentic adaptations.",
+      },
+    ],
+    stats: [
+      { label: "Curated fables", value: 50, suffix: "+" },
+      { label: "Adaptive age tiers", value: 2 },
+      { label: "Safety rating", value: 100, suffix: "%" },
+      { label: "Languages planned", value: 11 },
+    ],
+    screenshots: [
+      {
+        title: "Panchatantra AI Kids Explorer",
+        caption: "Interactive story map, characters, and voice narration.",
+        image: "/panchatantra-kids.jpg",
+      },
+    ],
+    faq: [
+      {
+        q: "What age group is Panchatantra AI designed for?",
+        a: "The platform is tailored for kids aged 4 to 14, with content calibrated across two key developmental tiers: early readers (4–8) and inquisitive youth (9–14).",
+      },
+      {
+        q: "How does the AI prevent inappropriate content?",
+        a: "Panchatantra AI operates on strict domain-restricted RAG pipelines with child-safety guardrails. It contains no unmoderated chat and is 100% COPPA-compliant.",
+      },
+      {
+        q: "Is Panchatantra AI available for schools?",
+        a: "Yes! We offer institutional licensing with educator dashboards for schools, cultural academies, and community education programs.",
+      },
+    ],
+    cta: { label: "Request Early Access", href: "/contact" },
   },
 ];
 

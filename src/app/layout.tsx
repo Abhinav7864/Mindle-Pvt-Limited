@@ -78,13 +78,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${manrope.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${manrope.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          forcedTheme="light"
+          defaultTheme="dark"
+          forcedTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >

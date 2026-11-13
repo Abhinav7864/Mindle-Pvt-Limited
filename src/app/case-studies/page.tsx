@@ -37,7 +37,7 @@ export default function CaseStudiesPage() {
                   className={`grid gap-0 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[direction:rtl]" : ""}`}
                 >
                   {/* Visual */}
-                  <CaseStudyVisual results={cs.results} />
+                  <CaseStudyVisual results={cs.results} slug={cs.slug} />
 
                   {/* Content */}
                   <div className="p-8 md:p-12 lg:[direction:ltr]">

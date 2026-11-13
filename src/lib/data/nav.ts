@@ -45,8 +45,9 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     links: [
       { label: "AI Development", href: "/services#ai-development" },
       { label: "SaaS Development", href: "/services#saas-development" },
+      { label: "Web Applications", href: "/services#web-applications" },
       { label: "Mobile Apps", href: "/services#mobile-apps" },
-      { label: "UI/UX Design", href: "/services#ui-ux-design" },
+      { label: "Automation", href: "/services#automation" },
       { label: "All services", href: "/services" },
     ],
   },

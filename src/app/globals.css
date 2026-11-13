@@ -7,71 +7,75 @@
 /* Design tokens                                                       */
 /* ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #09090b;
+  --background: #030712;       /* Deep high-tech midnight */
+  --foreground: #f8fafc;
 
-  --card: #ffffff;
-  --card-foreground: #09090b;
+  --card: #0b1120;
+  --card-foreground: #f8fafc;
 
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+  --muted: #0f172a;
+  --muted-foreground: #94a3b8;
 
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #18181b;
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #00D2FF;
 
-  /* Brand */
-  --primary: #09090b;          /* Clean black */
-  --primary-foreground: #fafafa;
-  --secondary: #f4f4f5;        
-  --secondary-foreground: #09090b;
+  /* Mindle Brand (Official Logo Palette: Deep Navy to Electric Blue to Cyan) */
+  --primary: #f8fafc;
+  --primary-foreground: #030712;
+  --secondary: #0f172a;        
+  --secondary-foreground: #f8fafc;
 
-  --accent: #C4653A;           /* Chase AI style accent orange/brown */
-  --accent-foreground: #ffffff;
-
-  --success: #28C840;
-  --warning: #FEBC2E;
-  --error: #FF5F57;
-
-  --radius: 0.75rem;
-
-  /* Surfaces used by gradients / glows */
-  --surface-1: #fafafa;
-  --surface-2: #f4f4f5;
-  --grid-line: rgba(0, 0, 0, 0.04);
-  --glow: rgba(0, 0, 0, 0.04);
-}
-
-.dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-
-  --card: #09090b;
-  --card-foreground: #fafafa;
-
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #d4d4d8;
-
-  --primary: #fafafa;
-  --primary-foreground: #09090b;
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
-
-  --accent: #C4653A;
+  --accent: #00D2FF;           /* Mindle Cyan */
+  --accent-blue: #0066FF;      /* Mindle Electric Blue */
+  --accent-navy: #041B4E;      /* Mindle Dark Blue */
   --accent-foreground: #ffffff;
 
   --success: #22c55e;
   --warning: #fbbf24;
   --error: #ef4444;
 
-  --surface-1: #18181b;
-  --surface-2: #27272a;
+  --radius: 0.75rem;
+
+  /* Surfaces used by gradients / glows */
+  --surface-1: #090e1a;
+  --surface-2: #0f172a;
   --grid-line: rgba(255, 255, 255, 0.04);
-  --glow: rgba(255, 255, 255, 0.02);
+  --glow: rgba(0, 210, 255, 0.12);
+}
+
+.dark {
+  --background: #030712;
+  --foreground: #f8fafc;
+
+  --card: #0b1120;
+  --card-foreground: #f8fafc;
+
+  --muted: #0f172a;
+  --muted-foreground: #94a3b8;
+
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #00D2FF;
+
+  --primary: #f8fafc;
+  --primary-foreground: #030712;
+  --secondary: #0f172a;
+  --secondary-foreground: #f8fafc;
+
+  --accent: #00D2FF;
+  --accent-blue: #0066FF;
+  --accent-navy: #041B4E;
+  --accent-foreground: #ffffff;
+
+  --success: #22c55e;
+  --warning: #fbbf24;
+  --error: #ef4444;
+
+  --surface-1: #090e1a;
+  --surface-2: #0f172a;
+  --grid-line: rgba(255, 255, 255, 0.04);
+  --glow: rgba(0, 210, 255, 0.12);
 }
 
 /* ------------------------------------------------------------------ */
@@ -92,6 +96,8 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-navy: var(--accent-navy);
   --color-accent-foreground: var(--accent-foreground);
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -140,6 +146,7 @@
   }
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
   body {
     background: var(--background);
@@ -149,7 +156,8 @@
     text-rendering: optimizeLegibility;
   }
   ::selection {
-    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    background: rgba(0, 102, 255, 0.4);
+    color: #00D2FF;
   }
   :focus-visible {
     outline: 2px solid var(--ring);
@@ -162,10 +170,20 @@
 /* Utilities                                                           */
 /* ------------------------------------------------------------------ */
 @layer utilities {
-  .text-gradient {
-    /* Removed heavy gradient, keeping a simple clean text style */
-    color: var(--foreground);
+  /* Mindle Official Logo Gradient for Words and Headings */
+  .text-gradient,
+  span.text-accent,
+  .gradient-text {
+    background: linear-gradient(135deg, #0052D4 0%, #0066FF 45%, #00D2FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
   }
+
+  .mindle-glow {
+    box-shadow: 0 0 45px -10px rgba(0, 210, 255, 0.35);
+  }
+
   .bg-grid {
     background-image:
       linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
@@ -178,11 +196,10 @@
   }
   .glass {
     background: color-mix(in srgb, var(--card) 85%, transparent);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
   }
   .glow-primary {
-    /* Muted glow to a subtle shadow */
-    box-shadow: 0 4px 20px -4px var(--glow);
+    box-shadow: 0 4px 25px -4px var(--glow);
   }
   .animated-border {
     position: relative;
@@ -193,7 +210,7 @@
     content: '';
     position: absolute;
     inset: -100%;
-    background: conic-gradient(transparent, var(--accent), transparent 30%);
+    background: conic-gradient(transparent, #00D2FF, #0066FF, transparent 35%);
     animation: var(--animate-border-spin);
     z-index: -1;
   }

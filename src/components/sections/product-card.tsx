@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, BookOpen } from "lucide-react";
 import { StatusBadge } from "@/components/ui/status-badge";
 import type { ProductCardData } from "@/lib/data/products";
 import { cn } from "@/lib/utils";
@@ -25,16 +25,20 @@ export function ProductCard({
     >
       <Link
         href={`/products/${product.slug}`}
-        className="flex h-full flex-col rounded-2xl border border-border bg-card p-6"
+        className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 sm:p-7 transition-all duration-300 hover:border-accent/40 hover:shadow-xl"
       >
         <div className="flex items-start justify-between gap-3">
           {product.slug === "gitaconnect" ? (
-            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-xl shadow-lg bg-[#f5e6a3]">
+            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-2xl shadow-lg bg-[#f5e6a3]">
               <img src="/Gitalogo.png" alt="GitaConnect" className="h-full w-full object-cover" />
+            </span>
+          ) : product.slug === "panchatantra-ai" ? (
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-white shadow-lg">
+              <BookOpen className="h-6 w-6" />
             </span>
           ) : (
             <span
-              className="grid h-12 w-12 place-items-center rounded-xl text-lg font-bold text-white shadow-lg"
+              className="grid h-12 w-12 place-items-center rounded-2xl text-lg font-bold text-white shadow-lg"
               style={{
                 backgroundImage: `linear-gradient(135deg, ${product.gradient[0]}, ${product.gradient[1]})`,
               }}
@@ -43,9 +47,11 @@ export function ProductCard({
               {product.name.charAt(0)}
             </span>
           )}
+
+          <StatusBadge status={product.status} />
         </div>
 
-        <h3 className="mt-5 flex items-center gap-1.5 font-display text-xl font-bold tracking-tight">
+        <h3 className="mt-5 flex items-center gap-1.5 font-display text-xl font-bold tracking-tight text-foreground">
           {product.name}
           <ArrowUpRight className="h-4 w-4 -translate-x-1 translate-y-1 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
         </h3>
@@ -54,8 +60,9 @@ export function ProductCard({
           {product.short}
         </p>
 
-        <div className="mt-5 text-xs text-muted-foreground font-medium">
-          {product.category} · {product.platform}
+        <div className="mt-5 pt-4 border-t border-border/50 text-xs text-muted-foreground font-medium flex items-center justify-between">
+          <span>{product.category}</span>
+          <span className="font-mono">{product.platform}</span>
         </div>
       </Link>
     </motion.div>
