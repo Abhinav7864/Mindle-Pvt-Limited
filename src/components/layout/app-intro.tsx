@@ -21,6 +21,11 @@ export function AppIntro() {
     return () => window.clearTimeout(timeout);
   }, [reduceMotion]);
 
+  const skip = () => {
+    sessionStorage.setItem("mindle-intro-seen", "true");
+    setVisible(false);
+  };
+
   return (
     <AnimatePresence>
       {visible && (
@@ -45,9 +50,10 @@ export function AppIntro() {
               transition={{ delay: 0.68, duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
             />
           </div>
-          <motion.span className="absolute bottom-8 text-[10px] uppercase tracking-[.28em] text-white/35" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
-            Product studio
-          </motion.span>
+          <div className="absolute bottom-8 flex items-center gap-6 font-mono text-[10px] uppercase tracking-[.22em] text-white/38">
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>Product studio</motion.span>
+            <motion.button type="button" onClick={skip} className="transition-colors hover:text-white" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}>Skip intro</motion.button>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
