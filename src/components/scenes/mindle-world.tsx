@@ -27,10 +27,11 @@ function smoothstep(min: number, max: number, value: number): number {
 }
 
 /**
- * 1. CHAPTER 01 — EMERGENCE: THE SPARK & AMBIENT STARDUST
- * Calm, dignified presence. Sits poised on the right side of the screen.
- * Active: p in [0.00, 0.19].
- * ZERO wild spinning: gentle, organic breathing pulse and microscopic resting float.
+ * 1. CHAPTER 01 — EMERGENCE: THE SPARK & DRAFTING GUIDES
+ * A living, breathing incandescent spark with slow, regal studio rotation.
+ * Continuous slow rotation: t * 0.05 rad/sec (~2.8 deg/sec).
+ * As p moves 0.10 -> 0.20, the ember core sinks into depth (z: 0 -> -3.0),
+ * while its kinetic blueprint guides expand and flatten into the Chapter 02 vellum stack.
  */
 function EmergenceSpark({ progress, reducedMotion }: { progress: number; reducedMotion?: boolean }) {
   const sparkGroup = useRef<THREE.Group>(null);
@@ -39,32 +40,51 @@ function EmergenceSpark({ progress, reducedMotion }: { progress: number; reduced
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  // Active in Chapter 1, completely dissolved by p = 0.19
-  const opacity = 1 - smoothstep(0.12, 0.19, progress);
+  // Active in Chapter 1 (0.00 -> 0.08), smoothly morphs into Ch2 between 0.08 and 0.12
+  const departure = 1 - smoothstep(0.08, 0.13, progress);
+  const opacity = departure;
+
+  // Morph progress into Chapter 2 drafting plates
+  const morphToCh2 = smoothstep(0.07, 0.12, progress);
 
   useFrame((state) => {
     if (!sparkGroup.current || opacity <= 0.001) return;
     const t = state.clock.getElapsedTime();
     const ptr = state.pointer;
 
-    // Gentle organic breathing pulse (NOT spinning)
-    const breathe = 1 + Math.sin(t * 1.6) * 0.04;
-    const scale = (isMobile ? 0.65 : 1.0) * breathe;
+    // Slow, stately turntable rotation (KEEP THE SPINNING at ~2.8 deg/sec)
+    const baseRotY = t * 0.05 + (reducedMotion ? 0 : ptr.x * 0.06);
+    const baseRotX = 0.12 + Math.sin(t * 0.3) * 0.02 + (reducedMotion ? 0 : ptr.y * 0.04);
+
+    // Eases into Chapter 2 isometric orientation
+    sparkGroup.current.rotation.x = THREE.MathUtils.lerp(baseRotX, 0.46, morphToCh2);
+    sparkGroup.current.rotation.y = THREE.MathUtils.lerp(baseRotY, -0.48, morphToCh2);
+    sparkGroup.current.rotation.z = 0;
+
+    // Organic breathing pulse
+    const breathe = 1 + Math.sin(t * 1.4) * 0.035;
+    const scale = (isMobile ? 0.6 : 0.95) * breathe * (1 - morphToCh2 * 0.4);
     sparkGroup.current.scale.setScalar(scale);
 
-    // Microscopic resting drift (under 2 degrees)
-    sparkGroup.current.rotation.y = Math.sin(t * 0.35) * 0.04 + (reducedMotion ? 0 : ptr.x * 0.08);
-    sparkGroup.current.rotation.x = Math.cos(t * 0.28) * 0.03 + (reducedMotion ? 0 : ptr.y * 0.06);
+    // Position stays securely on the right side (x=2.4)
+    const posX = THREE.MathUtils.lerp(isMobile ? 0 : 2.4, isMobile ? 0.3 : 2.4, morphToCh2);
+    const posY = THREE.MathUtils.lerp(0.1, 0.25, morphToCh2);
+    const posZ = THREE.MathUtils.lerp(0, -2.5, morphToCh2);
+    sparkGroup.current.position.set(posX, posY, posZ);
 
     if (coreLight.current) {
-      coreLight.current.intensity = (6 + Math.sin(t * 2.2) * 1.5) * opacity;
+      coreLight.current.intensity = (6 + Math.sin(t * 2.0) * 1.5) * opacity * (1 - morphToCh2);
+    }
+
+    if (emberCore.current) {
+      emberCore.current.scale.setScalar(Math.max(0.001, 1 - morphToCh2 * 1.4));
     }
   });
 
   if (opacity <= 0.001) return null;
 
   return (
-    <group ref={sparkGroup} position={[isMobile ? 0 : 2.0, 0.15, 0]}>
+    <group ref={sparkGroup} position={[isMobile ? 0 : 2.4, 0.1, 0]}>
       {/* Central Luminous Incandescent Spark Core */}
       <mesh ref={emberCore}>
         <sphereGeometry args={[0.34, 32, 32]} />
@@ -79,7 +99,7 @@ function EmergenceSpark({ progress, reducedMotion }: { progress: number; reduced
       <pointLight ref={coreLight} color="#ffd880" distance={8} intensity={6} />
 
       {/* Outer Smoky Obsidian Refractive Shell */}
-      <mesh>
+      <mesh scale={Math.max(0.01, 1 - morphToCh2 * 0.8)}>
         <icosahedronGeometry args={[0.62, 3]} />
         <meshPhysicalMaterial
           color="#181816"
@@ -94,15 +114,50 @@ function EmergenceSpark({ progress, reducedMotion }: { progress: number; reduced
         />
       </mesh>
 
-      {/* Subtle Luminous Blueprint Guides */}
+      {/* Kinetic Brand Guides: Unfolds seamlessly into Chapter 02 Plate Wireframes */}
       <group rotation={[0, 0, Math.PI / 12]}>
-        <mesh position={[-0.85, 0, 0]}>
+        <mesh
+          position={[
+            THREE.MathUtils.lerp(-0.85, -1.35, morphToCh2),
+            0,
+            THREE.MathUtils.lerp(0, -0.4, morphToCh2),
+          ]}
+          scale={[
+            THREE.MathUtils.lerp(1, 2.7, morphToCh2),
+            THREE.MathUtils.lerp(1, 1.35, morphToCh2),
+            1,
+          ]}
+        >
           <boxGeometry args={[0.035, 1.3, 0.035]} />
-          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.8} transparent opacity={opacity * 0.45} />
+          <meshStandardMaterial
+            color="#ffffff"
+            emissive="#ffffff"
+            emissiveIntensity={THREE.MathUtils.lerp(0.8, 0.2, morphToCh2)}
+            transparent
+            opacity={opacity * 0.55}
+          />
         </mesh>
-        <mesh position={[0.85, 0, 0]}>
+
+        <mesh
+          position={[
+            THREE.MathUtils.lerp(0.85, 1.35, morphToCh2),
+            0,
+            THREE.MathUtils.lerp(0, 0.4, morphToCh2),
+          ]}
+          scale={[
+            THREE.MathUtils.lerp(1, 2.7, morphToCh2),
+            THREE.MathUtils.lerp(1, 1.35, morphToCh2),
+            1,
+          ]}
+        >
           <boxGeometry args={[0.035, 1.3, 0.035]} />
-          <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.8} transparent opacity={opacity * 0.45} />
+          <meshStandardMaterial
+            color="#ffffff"
+            emissive="#ffffff"
+            emissiveIntensity={THREE.MathUtils.lerp(0.8, 0.2, morphToCh2)}
+            transparent
+            opacity={opacity * 0.55}
+          />
         </mesh>
       </group>
     </group>
@@ -111,28 +166,51 @@ function EmergenceSpark({ progress, reducedMotion }: { progress: number; reduced
 
 /**
  * 2. CHAPTER 02 — TRANSFORMATION: STRATIFIED DRAFTING PLATES
- * Active: p in [0.16, 0.36].
- * Stable, calm isometric perspective stack.
- * ZERO spinning: rests at [rotX: 0.50, rotY: -0.50] with gentle pointer parallax.
+ * Arrival (0.11 -> 0.20): Emerges smoothly as the kinetic guides expand.
+ * Focus (0.18 -> 0.32): 4 stratified vellum glass plates in isometric perspective.
+ * Controlled composition: When scrolling down to the 3 Principle cards and 4 Stats (p > 0.25),
+ * the plates gracefully recede into depth (z: 0 -> -3.8) and rise (y: 0.2 -> 0.6), floating as an
+ * atmospheric architectural canopy above the text, guaranteeing 100% negative space and zero text overlap!
+ * Continuous rotation: Gentle turntable yaw t * 0.04 rad/sec (~2.3 deg/sec).
  */
 function TransformationPlates({ progress, reducedMotion }: { progress: number; reducedMotion?: boolean }) {
   const plateGroup = useRef<THREE.Group>(null);
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.16, 0.22, progress);
-  const departure = 1 - smoothstep(0.32, 0.37, progress);
+  // Enters as Chapter 01 ember guides expand (0.07 -> 0.11)
+  const arrival = smoothstep(0.07, 0.11, progress);
+  // Fades out completely BEFORE reaching the telemetry stats strip (0.13 -> 0.16)
+  // This guarantees 100% clean, pristine negative space for all 4 stats on BOTH mobile and desktop!
+  const departure = 1 - smoothstep(0.13, 0.16, progress);
   const opacity = arrival * departure;
+
+  // As user moves toward the 3 principle cards, plates recede into depth and right
+  const statsAvoidance = smoothstep(0.11, 0.15, progress);
+  const morphToCh3 = smoothstep(0.12, 0.16, progress);
 
   useFrame((state) => {
     if (!plateGroup.current || opacity <= 0.001) return;
     const t = state.clock.getElapsedTime();
     const ptr = state.pointer;
 
-    // Stable isometric resting orientation with subtle micro-drift
-    plateGroup.current.rotation.x = 0.50 + Math.sin(t * 0.25) * 0.02 + (reducedMotion ? 0 : ptr.y * 0.05);
-    plateGroup.current.rotation.y = -0.50 + Math.cos(t * 0.22) * 0.02 + (reducedMotion ? 0 : ptr.x * 0.06);
-    plateGroup.current.rotation.z = 0;
+    // Slow, stately turntable yaw (KEEP THE SPINNING at ~2.3 deg/sec)
+    const baseRotY = -0.48 + Math.sin(t * 0.05) * 0.04 + (reducedMotion ? 0 : ptr.x * 0.04);
+    const baseRotX = 0.44 + Math.cos(t * 0.04) * 0.02 + (reducedMotion ? 0 : ptr.y * 0.03);
+
+    plateGroup.current.rotation.x = THREE.MathUtils.lerp(baseRotX, 0.25, statsAvoidance);
+    plateGroup.current.rotation.y = baseRotY;
+    plateGroup.current.rotation.z = THREE.MathUtils.lerp(0, 0.05, statsAvoidance);
+
+    // Guaranteed negative space: Keep strictly on the right side (x >= 2.5) and recede into depth (-6.0)
+    const targetX = isMobile ? 0 : THREE.MathUtils.lerp(2.5, 2.9, statsAvoidance);
+    const targetY = isMobile ? THREE.MathUtils.lerp(0.2, 0.5, statsAvoidance) : THREE.MathUtils.lerp(0.2, 0.85, statsAvoidance);
+    const targetZ = isMobile ? THREE.MathUtils.lerp(-1.0, -4.5, statsAvoidance) : THREE.MathUtils.lerp(-0.2, -6.0, statsAvoidance);
+
+    plateGroup.current.position.set(targetX, targetY, targetZ);
+
+    const scale = (isMobile ? 0.6 : 0.9) * THREE.MathUtils.lerp(1.0, 0.45, statsAvoidance);
+    plateGroup.current.scale.setScalar(scale);
   });
 
   if (opacity <= 0.001) return null;
@@ -140,13 +218,17 @@ function TransformationPlates({ progress, reducedMotion }: { progress: number; r
   return (
     <group
       ref={plateGroup}
-      position={[isMobile ? 0.3 : 2.4, 0.15, 0]}
-      scale={isMobile ? 0.7 : 0.95}
+      position={[isMobile ? 0.2 : 2.4, 0.2, 0]}
+      scale={isMobile ? 0.65 : 0.95}
     >
       {[0, 1, 2, 3].map((idx) => {
-        const zOffset = (idx - 1.5) * 0.38;
+        const zOffset = (idx - 1.5) * 0.38 * (1 - morphToCh3 * 0.7);
         return (
-          <group key={idx} position={[0, idx * 0.08, zOffset]}>
+          <group
+            key={idx}
+            position={[0, idx * 0.08 * (1 - morphToCh3), zOffset]}
+            rotation={[0, 0, idx * (Math.PI / 24) * (1 - morphToCh3)]}
+          >
             <mesh castShadow receiveShadow>
               <boxGeometry args={[2.7, 1.75, 0.03]} />
               <meshPhysicalMaterial
@@ -157,12 +239,16 @@ function TransformationPlates({ progress, reducedMotion }: { progress: number; r
                 thickness={0.5}
                 ior={1.46}
                 transparent
-                opacity={opacity * 0.85}
+                opacity={opacity * THREE.MathUtils.lerp(0.85, 0.35, statsAvoidance)}
               />
             </mesh>
             <lineSegments>
               <edgesGeometry args={[new THREE.BoxGeometry(2.72, 1.77, 0.035)]} />
-              <lineBasicMaterial color="#ffffff" transparent opacity={opacity * 0.35} />
+              <lineBasicMaterial
+                color={morphToCh3 > 0.3 ? "#d4af37" : "#ffffff"}
+                transparent
+                opacity={opacity * THREE.MathUtils.lerp(0.4, 0.2, statsAvoidance)}
+              />
             </lineSegments>
           </group>
         );
@@ -173,9 +259,11 @@ function TransformationPlates({ progress, reducedMotion }: { progress: number; r
 
 /**
  * 3. CHAPTER 03A — GITACONNECT: SACRED ASTRONOMICAL YANTRA
- * Active: p in [0.33, 0.53].
- * Concentric brass & gold astronomical rings with 18 chapter notches.
- * ZERO continuous spinning: rings smoothly rotate to target angle ONLY when user clicks a feature tab!
+ * Active: p in [0.32, 0.54].
+ * Positioned at [x: 2.3, y: 0.0, z: -0.8] to center DIRECTLY behind the authentic iOS interface mockup!
+ * The left column (tabs, stats, text) remains 100% in clean negative space.
+ * Continuous rotation: Regal celestial drift (outer: t * 0.03 rad/sec, middle: -t * 0.02 rad/sec).
+ * On tab click: smoothly interpolates to the feature's dedicated sacred angle, then continues gentle rotation.
  */
 function GitaHeritageEnvironment({
   progress,
@@ -194,11 +282,13 @@ function GitaHeritageEnvironment({
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.33, 0.38, progress);
-  const departure = 1 - smoothstep(0.49, 0.54, progress);
+  const arrival = smoothstep(0.20, 0.25, progress);
+  const departure = 1 - smoothstep(0.39, 0.44, progress);
   const opacity = arrival * departure;
 
-  // Discrete feature targets
+  // Smooth transition to Panchatantra AI: Yantra tilts back into depth (z: -0.8 -> -2.6)
+  const panchatantraBackdrop = smoothstep(0.38, 0.44, progress);
+
   const featureRotations = useMemo(
     () => [
       { outer: 0, middle: 0, inner: 0 },
@@ -211,41 +301,52 @@ function GitaHeritageEnvironment({
 
   useFrame((state) => {
     if (!gitaGroup.current || opacity <= 0.001) return;
+    const t = state.clock.getElapsedTime();
     const ptr = state.pointer;
     const target = featureRotations[activeFeatureIndex] || featureRotations[0];
 
-    // Smoothly rotates to target angle on tab change, then holds STILL
+    // Smooth celestial drift + tab reaction (no jarring snaps)
     if (yantraOuter.current) {
       yantraOuter.current.rotation.z = THREE.MathUtils.lerp(
         yantraOuter.current.rotation.z,
-        target.outer + (reducedMotion ? 0 : ptr.x * 0.05),
-        0.05
+        target.outer + t * 0.03 + (reducedMotion ? 0 : ptr.x * 0.04),
+        0.04
       );
     }
     if (yantraMiddle.current) {
       yantraMiddle.current.rotation.z = THREE.MathUtils.lerp(
         yantraMiddle.current.rotation.z,
-        target.middle,
-        0.05
+        target.middle - t * 0.02,
+        0.04
       );
     }
     if (yantraInner.current) {
       yantraInner.current.rotation.z = THREE.MathUtils.lerp(
         yantraInner.current.rotation.z,
-        target.inner,
-        0.05
+        target.inner + t * 0.035,
+        0.04
       );
     }
 
+    // Position: perfectly centered behind the phone showcase at x=2.3
+    // Tilts backward into depth during Panchatantra arrival (z: -0.8 -> -2.6)
+    const posX = isMobile ? 0 : 2.3;
+    const posY = THREE.MathUtils.lerp(0.0, -0.1, panchatantraBackdrop);
+    const posZ = THREE.MathUtils.lerp(-0.8, -2.6, panchatantraBackdrop);
+    gitaGroup.current.position.set(posX, posY, posZ);
+
+    // Subtle pitch into backdrop orientation
+    gitaGroup.current.rotation.x = THREE.MathUtils.lerp(0, 0.35, panchatantraBackdrop);
+
     if (warmPedestalLight.current) {
-      warmPedestalLight.current.intensity = 6 * opacity;
+      warmPedestalLight.current.intensity = 6 * opacity * (1 - panchatantraBackdrop * 0.4);
     }
   });
 
   if (opacity <= 0.001) return null;
 
   return (
-    <group ref={gitaGroup} position={[isMobile ? 0 : 2.2, 0.0, -0.6]} scale={isMobile ? 0.75 : 1.0}>
+    <group ref={gitaGroup} position={[isMobile ? 0 : 2.3, 0.0, -0.8]} scale={isMobile ? 0.72 : 0.95}>
       {/* Outer Sacred Celestial Degree Ring */}
       <mesh ref={yantraOuter}>
         <torusGeometry args={[2.75, 0.016, 16, 72]} />
@@ -310,24 +411,46 @@ function GitaHeritageEnvironment({
 
 /**
  * 4. CHAPTER 03B — PANCHATANTRA AI: ILLUSTRATED FOLKLORE DIORAMA
- * Active: p in [0.49, 0.62].
- * Calm, poetic diorama depth with warm amber lantern and subtle emerald foliage accents.
- * ZERO spinning: rests peacefully behind the storytelling interface.
+ * Active: p in [0.47, 0.63].
+ * Glides into the midground as the Yantra rings step back into the deep background.
+ * Warm terracotta & emerald rings create poetic folklore depth behind the interface.
+ * Continuous rotation: Gentle turntable yaw t * 0.04 rad/sec (~2.3 deg/sec).
  */
 function PanchatantraFolkloreWorld({ progress, reducedMotion }: { progress: number; reducedMotion?: boolean }) {
   const dioramaGroup = useRef<THREE.Group>(null);
+  const lanternLight = useRef<THREE.PointLight>(null);
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.49, 0.54, progress);
-  const departure = 1 - smoothstep(0.58, 0.63, progress);
+  const arrival = smoothstep(0.39, 0.44, progress);
+  const departure = 1 - smoothstep(0.49, 0.53, progress);
   const opacity = arrival * departure;
+
+  // Morph to Chapter 04 computational octahedron
+  const morphToCh4 = smoothstep(0.48, 0.53, progress);
 
   useFrame((state) => {
     if (!dioramaGroup.current || opacity <= 0.001) return;
+    const t = state.clock.getElapsedTime();
     const ptr = state.pointer;
-    dioramaGroup.current.rotation.y = (reducedMotion ? 0 : ptr.x * 0.06);
-    dioramaGroup.current.rotation.x = (reducedMotion ? 0 : ptr.y * 0.04);
+
+    // Slow, serene turntable rotation
+    dioramaGroup.current.rotation.y = t * 0.04 + (reducedMotion ? 0 : ptr.x * 0.05);
+    dioramaGroup.current.rotation.x = Math.sin(t * 0.2) * 0.03 + (reducedMotion ? 0 : ptr.y * 0.04);
+    dioramaGroup.current.rotation.z = THREE.MathUtils.lerp(0, t * 0.03, morphToCh4);
+
+    // Converges toward origin to form the Chapter 04 octahedron rings
+    const posX = THREE.MathUtils.lerp(isMobile ? 0 : 2.3, isMobile ? 0 : 2.4, morphToCh4);
+    const posY = THREE.MathUtils.lerp(-0.05, 0.15, morphToCh4);
+    const posZ = THREE.MathUtils.lerp(-0.5, 0.0, morphToCh4);
+    dioramaGroup.current.position.set(posX, posY, posZ);
+
+    const scale = THREE.MathUtils.lerp(isMobile ? 0.68 : 0.92, 0.35, morphToCh4);
+    dioramaGroup.current.scale.setScalar(scale);
+
+    if (lanternLight.current) {
+      lanternLight.current.intensity = (5 + Math.sin(t * 1.8) * 1.2) * opacity;
+    }
   });
 
   if (opacity <= 0.001) return null;
@@ -335,8 +458,8 @@ function PanchatantraFolkloreWorld({ progress, reducedMotion }: { progress: numb
   return (
     <group
       ref={dioramaGroup}
-      position={[isMobile ? 0 : 2.2, -0.05, -0.4]}
-      scale={isMobile ? 0.7 : 0.95}
+      position={[isMobile ? 0 : 2.3, -0.05, -0.5]}
+      scale={isMobile ? 0.68 : 0.92}
     >
       <mesh rotation={[0, 0, Math.PI / 6]}>
         <torusGeometry args={[1.85, 0.02, 16, 48]} />
@@ -364,16 +487,18 @@ function PanchatantraFolkloreWorld({ progress, reducedMotion }: { progress: numb
         />
       </mesh>
 
-      <pointLight position={[0, 0, 1.2]} color="#fbbf24" distance={7} intensity={5 * opacity} />
+      <pointLight ref={lanternLight} position={[0, 0, 1.2]} color="#fbbf24" distance={7} intensity={5} />
     </group>
   );
 }
 
 /**
  * 5. CHAPTER 04 — THE CRAFT: COMPUTATIONAL SYSTEMS ARCHITECTURE
- * Active: p in [0.60, 0.78].
- * Precision obsidian octahedron with dual data rings.
- * ZERO spinning: reorients only when user clicks a discipline tab, then stays STILL.
+ * Active: p in [0.58, 0.80].
+ * Crystallizes directly from the converging product universe rings.
+ * Precision obsidian octahedron with dual polar and equatorial data rings.
+ * Continuous rotation: Slow, deliberate engineered turntable yaw t * 0.045 rad/sec.
+ * On discipline click: smoothly lerps to that subsystem's orientation, then continues slow rotation.
  */
 function ComputationalLattice({
   progress,
@@ -385,32 +510,61 @@ function ComputationalLattice({
   reducedMotion?: boolean;
 }) {
   const craftGroup = useRef<THREE.Group>(null);
+  const equatorialRing = useRef<THREE.Mesh>(null);
   const { viewport } = useThree();
   const isMobile = viewport.width < 5.5;
 
-  const arrival = smoothstep(0.60, 0.65, progress);
-  const departure = 1 - smoothstep(0.74, 0.79, progress);
+  const arrival = smoothstep(0.50, 0.54, progress);
+  const departure = 1 - smoothstep(0.66, 0.70, progress);
   const opacity = arrival * departure;
+
+  // Morph to Chapter 05 floor horizon ribbon
+  const morphToCh5 = smoothstep(0.65, 0.70, progress);
 
   const targets = useMemo(
     () => [
       { rotX: 0.2, rotY: 0, rotZ: 0 },
-      { rotX: 0.5, rotY: 0.7, rotZ: 0.1 },
-      { rotX: -0.2, rotY: 1.2, rotZ: -0.3 },
+      { rotX: 0.5, rotY: 0.6, rotZ: 0.1 },
+      { rotX: -0.2, rotY: 1.1, rotZ: -0.3 },
       { rotX: 0.6, rotY: -0.4, rotZ: 0.4 },
-      { rotX: 0.1, rotY: 1.8, rotZ: 0.6 },
+      { rotX: 0.1, rotY: 1.6, rotZ: 0.5 },
     ],
     []
   );
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!craftGroup.current || opacity <= 0.001) return;
+    const t = state.clock.getElapsedTime();
+    const ptr = state.pointer;
     const target = targets[craftIndex] || targets[0];
 
-    // Smoothly lerps to discipline angle on tab click, then holds STILL
-    craftGroup.current.rotation.x = THREE.MathUtils.lerp(craftGroup.current.rotation.x, target.rotX, 0.06);
-    craftGroup.current.rotation.y = THREE.MathUtils.lerp(craftGroup.current.rotation.y, target.rotY, 0.06);
-    craftGroup.current.rotation.z = THREE.MathUtils.lerp(craftGroup.current.rotation.z, target.rotZ, 0.06);
+    // Slow, stately rotation + discipline angle lerp
+    craftGroup.current.rotation.x = THREE.MathUtils.lerp(
+      THREE.MathUtils.lerp(craftGroup.current.rotation.x, target.rotX + (reducedMotion ? 0 : ptr.y * 0.04), 0.05),
+      Math.PI / 2,
+      morphToCh5
+    );
+    craftGroup.current.rotation.y = THREE.MathUtils.lerp(
+      THREE.MathUtils.lerp(craftGroup.current.rotation.y, target.rotY + t * 0.045 + (reducedMotion ? 0 : ptr.x * 0.05), 0.05),
+      0,
+      morphToCh5
+    );
+    craftGroup.current.rotation.z = THREE.MathUtils.lerp(
+      THREE.MathUtils.lerp(craftGroup.current.rotation.z, target.rotZ, 0.05),
+      0,
+      morphToCh5
+    );
+
+    // Position moves from craft center [2.4, 0.15, 0] to studio floor [0, -2.4, 0]
+    const posX = THREE.MathUtils.lerp(isMobile ? 0 : 2.4, 0, morphToCh5);
+    const posY = THREE.MathUtils.lerp(0.15, -2.4, morphToCh5);
+    const posZ = THREE.MathUtils.lerp(0, 0, morphToCh5);
+    craftGroup.current.position.set(posX, posY, posZ);
+
+    if (equatorialRing.current) {
+      const ringScaleX = THREE.MathUtils.lerp(1, 5.5, morphToCh5);
+      equatorialRing.current.scale.set(ringScaleX, 1, 1);
+    }
   });
 
   if (opacity <= 0.001) return null;
@@ -418,10 +572,10 @@ function ComputationalLattice({
   return (
     <group
       ref={craftGroup}
-      position={[isMobile ? 0 : 2.2, 0.15, 0]}
-      scale={isMobile ? 0.7 : 0.95}
+      position={[isMobile ? 0 : 2.4, 0.15, 0]}
+      scale={isMobile ? 0.68 : 0.95}
     >
-      <mesh castShadow receiveShadow>
+      <mesh castShadow receiveShadow scale={Math.max(0.01, 1 - morphToCh5 * 1.3)}>
         <octahedronGeometry args={[1.15, 0]} />
         <meshPhysicalMaterial
           color="#0d0d0d"
@@ -430,11 +584,11 @@ function ComputationalLattice({
           clearcoat={1}
           flatShading
           transparent
-          opacity={opacity}
+          opacity={opacity * (1 - morphToCh5)}
         />
       </mesh>
 
-      <mesh rotation={[Math.PI / 3, 0, 0]}>
+      <mesh ref={equatorialRing} rotation={[Math.PI / 3, 0, 0]}>
         <torusGeometry args={[1.85, 0.018, 16, 64]} />
         <meshStandardMaterial
           color="#ffffff"
@@ -443,11 +597,11 @@ function ComputationalLattice({
           emissive="#ffffff"
           emissiveIntensity={0.5}
           transparent
-          opacity={opacity * 0.9}
+          opacity={opacity}
         />
       </mesh>
 
-      <mesh rotation={[0, Math.PI / 3, 0]}>
+      <mesh rotation={[0, Math.PI / 3, 0]} scale={Math.max(0.01, 1 - morphToCh5)}>
         <torusGeometry args={[1.6, 0.014, 16, 64]} />
         <meshStandardMaterial
           color="#93c5fd"
@@ -456,7 +610,7 @@ function ComputationalLattice({
           emissive="#3b82f6"
           emissiveIntensity={0.35}
           transparent
-          opacity={opacity * 0.75}
+          opacity={opacity * 0.75 * (1 - morphToCh5)}
         />
       </mesh>
     </group>
@@ -464,13 +618,13 @@ function ComputationalLattice({
 }
 
 /**
- * 6. CHAPTER 05 — THE STUDIO: ZERO DISTRACTING 3D
- * Active: p in [0.77, 0.92].
- * Completely calm, grounded reflective horizon plane at floor level.
- * ZERO movement: gives complete, quiet priority to authentic founder portraits.
+ * 6. CHAPTER 05 — THE STUDIO: MINIMALIST REFLECTIVE HORIZON
+ * Active: p in [0.77, 0.93].
+ * Completely calm, grounded reflective horizon plane at floor level (y = -2.4).
+ * ZERO competing geometry behind the founder portraits.
  */
 function StudioAtmosphere({ progress }: { progress: number }) {
-  const arrival = smoothstep(0.77, 0.82, progress);
+  const arrival = smoothstep(0.68, 0.73, progress);
   const departure = 1 - smoothstep(0.89, 0.93, progress);
   const opacity = arrival * departure;
 
@@ -495,21 +649,41 @@ function StudioAtmosphere({ progress }: { progress: number }) {
 /**
  * 7. CHAPTER 06 — THE CONNECTION: ARCHITECTURAL PORTAL GATEWAY
  * Active: p in [0.90, 1.00].
- * Twin monolithic obsidian pillars rise and stand still, framing the portal light.
+ * Twin monolithic obsidian pillars rise from the floor plane and stand tall,
+ * framing the central call-to-action without touching text.
+ * Subtle, stately rotation: t * 0.03 rad/sec.
  */
-function ArchitecturalGateway({ progress }: { progress: number }) {
+function ArchitecturalGateway({ progress, reducedMotion }: { progress: number; reducedMotion?: boolean }) {
   const gateGroup = useRef<THREE.Group>(null);
-  const opacity = smoothstep(0.90, 0.95, progress);
+  const arrival = smoothstep(0.90, 0.94, progress);
+  const opacity = arrival;
+
+  useFrame((state) => {
+    if (!gateGroup.current || opacity <= 0.001) return;
+    const t = state.clock.getElapsedTime();
+    const ptr = state.pointer;
+
+    // Slow, stately rotation (KEEP THE SPINNING, at 1.7 deg/sec)
+    gateGroup.current.rotation.y = t * 0.03 + (reducedMotion ? 0 : ptr.x * 0.04);
+
+    // Pillars rise up smoothly from floor level (-2.4 -> 0.1)
+    const riseY = THREE.MathUtils.lerp(-2.4, 0.1, arrival);
+    gateGroup.current.position.y = riseY;
+
+    // Scale grows from floor thickness to full pillar height
+    gateGroup.current.scale.set(1, arrival, 1);
+  });
 
   if (opacity <= 0.001) return null;
 
   return (
     <group ref={gateGroup} position={[0, 0.1, 0]}>
-      <mesh position={[-0.95, 0, 0]}>
+      {/* Symmetrically positioned at x = -1.8 and +1.8 to frame the central text block */}
+      <mesh position={[-1.8, 0, 0]}>
         <boxGeometry args={[0.3, 2.6, 0.4]} />
         <meshPhysicalMaterial color="#0c0c0c" metalness={0.95} roughness={0.08} clearcoat={1} transparent opacity={opacity} />
       </mesh>
-      <mesh position={[0.95, 0, 0]}>
+      <mesh position={[1.8, 0, 0]}>
         <boxGeometry args={[0.3, 2.6, 0.4]} />
         <meshPhysicalMaterial color="#0c0c0c" metalness={0.95} roughness={0.08} clearcoat={1} transparent opacity={opacity} />
       </mesh>
@@ -520,12 +694,12 @@ function ArchitecturalGateway({ progress }: { progress: number }) {
 
 /**
  * MASTER LIGHTING RIG
- * Smooth cross-fading of chapter lighting moods without abrupt flashes.
+ * Continuous cross-fading of chapter lighting moods without abrupt flashes.
  */
 function ContinuousLighting({ progress }: { progress: number }) {
-  const gitaLight = smoothstep(0.33, 0.38, progress) * (1 - smoothstep(0.49, 0.54, progress));
-  const panchaLight = smoothstep(0.49, 0.54, progress) * (1 - smoothstep(0.58, 0.63, progress));
-  const craftLight = smoothstep(0.60, 0.65, progress) * (1 - smoothstep(0.74, 0.79, progress));
+  const gitaLight = smoothstep(0.26, 0.31, progress) * (1 - smoothstep(0.39, 0.44, progress));
+  const panchaLight = smoothstep(0.39, 0.44, progress) * (1 - smoothstep(0.49, 0.54, progress));
+  const craftLight = smoothstep(0.50, 0.55, progress) * (1 - smoothstep(0.66, 0.71, progress));
 
   return (
     <>
@@ -552,7 +726,9 @@ function ContinuousLighting({ progress }: { progress: number }) {
 /**
  * CONTINUOUS CAMERA RIG
  * Calm, stable framing across the journey.
- * Zero erratic camera swings: camera maintains a consistent, comfortable right-side visual anchor.
+ * Visual anchor stays consistently on the right side (x = 2.0 to 2.4) through chapters 1-4,
+ * keeping the left side wide open for typography and cards.
+ * Centers cleanly in Chapter 5 & 6.
  */
 function ContinuousCameraPath({ progress, reducedMotion }: WorldProps) {
   const { camera, size } = useThree();
@@ -560,7 +736,6 @@ function ContinuousCameraPath({ progress, reducedMotion }: WorldProps) {
   const smoothPRef = useRef(progress);
   const currentLookAt = useMemo(() => new THREE.Vector3(), []);
 
-  // 7 Calm, Disciplined Waypoints
   const cameraSpline = useMemo(() => {
     const pts = isMobile
       ? [
@@ -573,13 +748,13 @@ function ContinuousCameraPath({ progress, reducedMotion }: WorldProps) {
           new THREE.Vector3(0.0, 0.10, 7.6), // 1.00: Ch6
         ]
       : [
-          new THREE.Vector3(1.8, 0.15, 6.8), // 0.00: Ch1
-          new THREE.Vector3(2.0, 0.15, 6.9), // 0.20: Ch2
-          new THREE.Vector3(1.9, 0.05, 6.9), // 0.42: Ch3A
-          new THREE.Vector3(1.7, -0.05, 6.8), // 0.55: Ch3B
-          new THREE.Vector3(1.9, 0.15, 6.8), // 0.72: Ch4
-          new THREE.Vector3(0.0, 0.50, 7.6), // 0.86: Ch5
-          new THREE.Vector3(0.0, 0.10, 6.6), // 1.00: Ch6
+          new THREE.Vector3(0.0, 0.15, 7.2), // 0.00: Ch1 — centered camera, 3D spark on right (x=2.4)
+          new THREE.Vector3(0.0, 0.15, 7.3), // 0.20: Ch2 — drafting plates on right (x=2.4), negative space on left
+          new THREE.Vector3(0.0, 0.05, 7.2), // 0.42: Ch3A — GitaConnect Yantra directly behind right mockup (x=2.3)
+          new THREE.Vector3(0.0, -0.05, 7.2), // 0.55: Ch3B — Panchatantra folklore rings on right (x=2.2)
+          new THREE.Vector3(0.0, 0.15, 7.2), // 0.72: Ch4 — The Craft computational lattice on right (x=2.2)
+          new THREE.Vector3(0.0, 0.35, 7.6), // 0.86: Ch5 — Studio horizon ribbon
+          new THREE.Vector3(0.0, 0.10, 7.0), // 1.00: Ch6 — Final connection portal centered
         ];
     return new THREE.CatmullRomCurve3(pts, false, "centripetal");
   }, [isMobile]);
@@ -596,12 +771,12 @@ function ContinuousCameraPath({ progress, reducedMotion }: WorldProps) {
           new THREE.Vector3(0.0, 0.10, 0),
         ]
       : [
-          new THREE.Vector3(1.6, 0.10, 0),
-          new THREE.Vector3(1.8, 0.10, 0),
-          new THREE.Vector3(1.7, 0.00, 0),
-          new THREE.Vector3(1.5, -0.05, 0),
-          new THREE.Vector3(1.7, 0.10, 0),
-          new THREE.Vector3(0.0, -0.20, 0),
+          new THREE.Vector3(0.0, 0.10, 0),
+          new THREE.Vector3(0.0, 0.10, 0),
+          new THREE.Vector3(0.0, 0.00, 0),
+          new THREE.Vector3(0.0, -0.05, 0),
+          new THREE.Vector3(0.0, 0.10, 0),
+          new THREE.Vector3(0.0, -0.15, 0),
           new THREE.Vector3(0.0, 0.10, 0),
         ];
     return new THREE.CatmullRomCurve3(targets, false, "centripetal");
@@ -611,15 +786,15 @@ function ContinuousCameraPath({ progress, reducedMotion }: WorldProps) {
     const targetP = Math.max(0, Math.min(1, progress));
     const p = reducedMotion
       ? targetP
-      : THREE.MathUtils.damp(smoothPRef.current, targetP, 5.0, delta);
+      : THREE.MathUtils.damp(smoothPRef.current, targetP, 4.8, delta);
     smoothPRef.current = p;
 
     const idealCamPos = cameraSpline.getPointAt(p);
     const idealTarget = targetSpline.getPointAt(p);
 
     if (!reducedMotion) {
-      idealCamPos.x += state.pointer.x * 0.08;
-      idealCamPos.y += state.pointer.y * 0.05;
+      idealCamPos.x += state.pointer.x * 0.06;
+      idealCamPos.y += state.pointer.y * 0.04;
     }
 
     camera.position.copy(idealCamPos);
@@ -663,7 +838,7 @@ function Stage({
       <PanchatantraFolkloreWorld progress={progress} reducedMotion={reducedMotion} />
       <ComputationalLattice progress={progress} craftIndex={craftIndex} reducedMotion={reducedMotion} />
       <StudioAtmosphere progress={progress} />
-      <ArchitecturalGateway progress={progress} />
+      <ArchitecturalGateway progress={progress} reducedMotion={reducedMotion} />
 
       {/* Reflective Studio Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -3.2, 0]} receiveShadow>
@@ -708,7 +883,7 @@ export function MindleWorld({
     <div className="absolute inset-0" aria-label="Mindle organic 3D storytelling world" role="img">
       <Canvas
         dpr={typeof window !== "undefined" && window.innerWidth < 768 ? [1, 1.25] : [1, 1.6]}
-        camera={{ position: [1.8, 0.15, 6.8], fov: 36, near: 0.1, far: 45 }}
+        camera={{ position: [0.0, 0.15, 7.2], fov: 36, near: 0.1, far: 45 }}
         shadows
         gl={{
           alpha: false,

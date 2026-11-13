@@ -59,12 +59,12 @@ export function JourneyExperience() {
           const p = Math.max(0, Math.min(1, self.progress));
           setProgress(p);
 
-          // Hysteresis-aware chapter tracking
-          if (p < 0.18) setActiveChapter(1);
-          else if (p < 0.38) setActiveChapter(2);
-          else if (p < 0.62) setActiveChapter(3);
-          else if (p < 0.80) setActiveChapter(4);
-          else if (p < 0.92) setActiveChapter(5);
+          // Calibrated chapter tracking matching exact DOM scroll offsets
+          if (p < 0.12) setActiveChapter(1);
+          else if (p < 0.26) setActiveChapter(2);
+          else if (p < 0.51) setActiveChapter(3);
+          else if (p < 0.69) setActiveChapter(4);
+          else if (p < 0.90) setActiveChapter(5);
           else setActiveChapter(6);
         },
       });
