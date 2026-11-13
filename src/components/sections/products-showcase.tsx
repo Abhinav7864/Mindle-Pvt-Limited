@@ -1,108 +1,54 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Button } from "@/components/ui/button";
-import { StatusBadge } from "@/components/ui/status-badge";
-import { Reveal, RevealGroup } from "@/components/ui/reveal";
-import { ProductCard } from "@/components/sections/product-card";
-import { PhoneMockup } from "@/components/sections/phone-mockup";
-import { products, featuredProduct, toCardData } from "@/lib/data/products";
-import { Tilt3D } from "@/components/ui/tilt-3d";
+import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/ui/reveal";
+import { products } from "@/lib/data/products";
+
+const images: Record<string, string> = {
+  "gita-connect": "/gitaconnect-app.jpg",
+  "panchatantra-ai": "/panchatantra-kids.jpg",
+};
 
 export function ProductsShowcase() {
-  const rest = products.filter((p) => p.slug !== featuredProduct.slug);
   return (
-    <section className="relative py-12 sm:py-16 md:py-24">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-full max-w-[1000px] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle_at_center,rgba(0,102,255,0.15),transparent_70%)] blur-3xl" />
+    <section id="work" className="relative border-y border-white/[.1] bg-[#0d0d0d] py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
+        <Reveal className="grid gap-8 lg:grid-cols-[.75fr_1.25fr] lg:items-end">
+          <p className="font-mono text-[10px] uppercase tracking-[.24em] text-white/45">Selected work</p>
+          <h2 className="max-w-4xl font-display text-[clamp(2.8rem,5.2vw,5.8rem)] font-semibold leading-[.93] tracking-[-.065em]">
+            Building products with a reason to exist.
+          </h2>
+        </Reveal>
 
-      <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
-        <SectionHeading
-          eyebrow="Products Portfolio"
-          title={
-            <>
-              Products are our <span className="text-accent">centerpiece</span>
-            </>
-          }
-          description="We don't just build software for others—we build and own products that solve real problems."
-        />
-
-        {/* Featured: GitaConnect */}
-        <Reveal className="mt-12">
-          <Tilt3D maxTilt={6} className="w-full">
-            <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card/90 shadow-2xl backdrop-blur-xl">
-              <div className="absolute inset-0 bg-dots opacity-30" />
-              <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#00D2FF]/15 blur-3xl" />
-              <div className="pointer-events-none absolute -left-24 -bottom-24 h-96 w-96 rounded-full bg-[#0066FF]/20 blur-3xl" />
-
-              <div className="relative grid items-center gap-8 p-6 md:p-14 lg:grid-cols-2">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-500">
-                      <Sparkles className="h-3 w-3" /> Flagship App · {featuredProduct.category}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">
-                    {featuredProduct.name}
-                  </h3>
-                  <p className="mt-2 text-lg font-medium text-accent">
-                    {featuredProduct.tagline}
-                  </p>
-                  <p className="mt-4 max-w-lg leading-relaxed text-muted-foreground">
-                    {featuredProduct.description}
-                  </p>
-                  <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-                    {featuredProduct.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-2 text-sm">
-                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <Button asChild variant="primary" className="shadow-lg shadow-accent/10">
-                      <Link href={`/products/${featuredProduct.slug}`}>
-                        Explore {featuredProduct.name}
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </Button>
-                    <Button asChild variant="outline">
-                      <Link
-                        href={featuredProduct.cta.href}
-                        target={featuredProduct.cta.href.startsWith("http") ? "_blank" : undefined}
-                        rel={featuredProduct.cta.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      >
-                        {featuredProduct.cta.label}
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className="mx-auto block mt-8 lg:mt-0 max-w-[280px] sm:max-w-[320px] lg:max-w-none">
-                  <div className="animated-border rounded-[2.6rem] p-[2px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)]">
-                    <PhoneMockup className="rounded-[2.5rem] relative bg-background" />
-                  </div>
+        <div className="mt-16 divide-y divide-white/[.13] border-y border-white/[.13]">
+          {products.map((product, index) => (
+            <Reveal key={product.slug} className="group grid gap-10 py-12 md:py-16 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
+              <div className={index % 2 ? "lg:order-2" : ""}>
+                <p className="font-mono text-[10px] uppercase tracking-[.22em] text-white/42">0{index + 1} / {product.category}</p>
+                <h3 className="mt-5 font-display text-4xl font-semibold tracking-[-.055em] md:text-6xl">{product.name}</h3>
+                <p className="mt-4 max-w-lg text-lg leading-8 text-white/60">{product.tagline}</p>
+                <p className="mt-6 max-w-xl leading-7 text-white/48">{product.short}</p>
+                <div className="mt-8 flex items-center gap-5">
+                  <Link href={`/products/${product.slug}`} className="magnetic-link inline-flex items-center gap-2 border-b border-white pb-1 text-sm font-medium text-white">
+                    View product <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                  <span className="font-mono text-[10px] uppercase tracking-[.16em] text-white/35">{product.status}</span>
                 </div>
               </div>
-            </div>
-          </Tilt3D>
-        </Reveal>
-
-        {/* Upcoming products */}
-        <RevealGroup className="mt-8 grid gap-6 md:grid-cols-3">
-          {rest.map((p) => (
-            <ProductCard key={p.slug} product={toCardData(p)} />
+              <Link href={`/products/${product.slug}`} className={`relative block aspect-[16/10] overflow-hidden bg-[#171717] ${index % 2 ? "lg:order-1" : ""}`} aria-label={`View ${product.name}`}>
+                {images[product.slug] ? (
+                  <Image src={images[product.slug]} alt="" fill className="object-cover opacity-80 grayscale transition duration-700 group-hover:scale-[1.035] group-hover:grayscale-0" sizes="(min-width: 1024px) 50vw, 100vw" />
+                ) : null}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between border-t border-white/30 pt-3 font-mono text-[10px] uppercase tracking-[.16em] text-white/70">
+                  <span>{product.platform}</span><ArrowUpRight className="h-4 w-4" />
+                </div>
+              </Link>
+            </Reveal>
           ))}
-        </RevealGroup>
-
-        <Reveal className="mt-10 text-center">
-          <Button asChild variant="ghost">
-            <Link href="/products">
-              View all products <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-        </Reveal>
+        </div>
+        <Reveal className="mt-10 text-right"><Link href="/products" className="magnetic-link inline-flex items-center gap-2 text-sm text-white/65 hover:text-white">Explore all products <ArrowUpRight className="h-4 w-4" /></Link></Reveal>
       </div>
     </section>
   );
 }
-

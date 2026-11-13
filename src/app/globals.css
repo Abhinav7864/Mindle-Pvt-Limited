@@ -7,29 +7,29 @@
 /* Design tokens                                                       */
 /* ------------------------------------------------------------------ */
 :root {
-  --background: #030712;       /* Deep high-tech midnight */
-  --foreground: #f8fafc;
+  --background: #080808;
+  --foreground: #f5f5f3;
 
-  --card: #0b1120;
-  --card-foreground: #f8fafc;
+  --card: #101010;
+  --card-foreground: #f5f5f3;
 
-  --muted: #0f172a;
-  --muted-foreground: #94a3b8;
+  --muted: #171717;
+  --muted-foreground: #9b9b98;
 
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #00D2FF;
+  --border: #292929;
+  --input: #292929;
+  --ring: #f5f5f3;
 
-  /* Mindle Brand (Official Logo Palette: Deep Navy to Electric Blue to Cyan) */
-  --primary: #f8fafc;
-  --primary-foreground: #030712;
-  --secondary: #0f172a;        
-  --secondary-foreground: #f8fafc;
+  /* The brand asset is monochrome. Keep the interface deliberately quiet. */
+  --primary: #f5f5f3;
+  --primary-foreground: #080808;
+  --secondary: #171717;
+  --secondary-foreground: #f5f5f3;
 
-  --accent: #00D2FF;           /* Mindle Cyan */
-  --accent-blue: #0066FF;      /* Mindle Electric Blue */
-  --accent-navy: #041B4E;      /* Mindle Dark Blue */
-  --accent-foreground: #ffffff;
+  --accent: #f5f5f3;
+  --accent-blue: #bdbdb8;
+  --accent-navy: #222222;
+  --accent-foreground: #080808;
 
   --success: #22c55e;
   --warning: #fbbf24;
@@ -38,44 +38,44 @@
   --radius: 0.75rem;
 
   /* Surfaces used by gradients / glows */
-  --surface-1: #090e1a;
-  --surface-2: #0f172a;
+  --surface-1: #0d0d0d;
+  --surface-2: #141414;
   --grid-line: rgba(255, 255, 255, 0.04);
-  --glow: rgba(0, 210, 255, 0.12);
+  --glow: rgba(255, 255, 255, 0.12);
 }
 
 .dark {
-  --background: #030712;
-  --foreground: #f8fafc;
+  --background: #080808;
+  --foreground: #f5f5f3;
 
-  --card: #0b1120;
-  --card-foreground: #f8fafc;
+  --card: #101010;
+  --card-foreground: #f5f5f3;
 
-  --muted: #0f172a;
-  --muted-foreground: #94a3b8;
+  --muted: #171717;
+  --muted-foreground: #9b9b98;
 
-  --border: #1e293b;
-  --input: #1e293b;
-  --ring: #00D2FF;
+  --border: #292929;
+  --input: #292929;
+  --ring: #f5f5f3;
 
-  --primary: #f8fafc;
-  --primary-foreground: #030712;
-  --secondary: #0f172a;
-  --secondary-foreground: #f8fafc;
+  --primary: #f5f5f3;
+  --primary-foreground: #080808;
+  --secondary: #171717;
+  --secondary-foreground: #f5f5f3;
 
-  --accent: #00D2FF;
-  --accent-blue: #0066FF;
-  --accent-navy: #041B4E;
-  --accent-foreground: #ffffff;
+  --accent: #f5f5f3;
+  --accent-blue: #bdbdb8;
+  --accent-navy: #222222;
+  --accent-foreground: #080808;
 
   --success: #22c55e;
   --warning: #fbbf24;
   --error: #ef4444;
 
-  --surface-1: #090e1a;
-  --surface-2: #0f172a;
+  --surface-1: #0d0d0d;
+  --surface-2: #141414;
   --grid-line: rgba(255, 255, 255, 0.04);
-  --glow: rgba(0, 210, 255, 0.12);
+  --glow: rgba(255, 255, 255, 0.12);
 }
 
 /* ------------------------------------------------------------------ */
@@ -155,10 +155,7 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  ::selection {
-    background: rgba(0, 102, 255, 0.4);
-    color: #00D2FF;
-  }
+  ::selection { background: #f5f5f3; color: #080808; }
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
@@ -171,17 +168,10 @@
 /* ------------------------------------------------------------------ */
 @layer utilities {
   /* Mindle Official Logo Gradient for Words and Headings */
-  .text-gradient,
-  span.text-accent,
-  .gradient-text {
-    background: linear-gradient(135deg, #0052D4 0%, #0066FF 45%, #00D2FF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-  }
+  .text-gradient, span.text-accent, .gradient-text { color: var(--foreground); }
 
   .mindle-glow {
-    box-shadow: 0 0 45px -10px rgba(0, 210, 255, 0.35);
+    box-shadow: 0 0 45px -10px rgba(255, 255, 255, 0.22);
   }
 
   .bg-grid {
@@ -210,7 +200,7 @@
     content: '';
     position: absolute;
     inset: -100%;
-    background: conic-gradient(transparent, #00D2FF, #0066FF, transparent 35%);
+    background: conic-gradient(transparent, #f5f5f3, #777, transparent 35%);
     animation: var(--animate-border-spin);
     z-index: -1;
   }
@@ -225,6 +215,17 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
+
+/* Editorial motion language used by the new studio homepage. */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+  opacity: .045;
+}
+
+.hairline { border-color: color-mix(in srgb, var(--foreground) 15%, transparent); }
+
+.magnetic-link { transition: color .3s ease, transform .3s cubic-bezier(.22,1,.36,1); }
+.magnetic-link:hover { transform: translateX(5px); }
 
 @media (prefers-reduced-motion: reduce) {
   *,

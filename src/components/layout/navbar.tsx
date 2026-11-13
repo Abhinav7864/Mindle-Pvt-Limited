@@ -8,7 +8,6 @@ import { ChevronDown, ArrowRight } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { StatusBadge } from "@/components/ui/status-badge";
 import { mainNav, productMenu, serviceMenu } from "@/lib/data/nav";
 import { cn } from "@/lib/utils";
 
@@ -36,12 +35,12 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border/80 bg-background/85 backdrop-blur-xl shadow-lg shadow-black/20"
+          ? "border-b border-white/[.12] bg-[#080808]/90 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       )}
       onMouseLeave={() => setOpenMenu(null)}
     >
-      <div className="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-6 md:px-8">
+      <div className="mx-auto flex h-[72px] w-full max-w-[1440px] items-center justify-between px-6 md:px-10 lg:px-16">
         <Logo />
 
         <nav className="hidden items-center gap-1 lg:flex">
@@ -56,7 +55,7 @@ export function Navbar() {
                 >
                   <button
                     className={cn(
-                      "flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                    "flex items-center gap-1 px-3 py-2 text-xs font-medium uppercase tracking-[.14em] transition-colors hover:text-foreground",
                       active || openMenu === item.label
                         ? "text-foreground"
                         : "text-muted-foreground"
@@ -80,7 +79,7 @@ export function Navbar() {
                 href={item.href}
                 onMouseEnter={() => setOpenMenu(null)}
                 className={cn(
-                  "rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:text-foreground",
+                  "px-3 py-2 text-xs font-medium uppercase tracking-[.14em] transition-colors hover:text-foreground",
                   active ? "text-foreground" : "text-muted-foreground"
                 )}
               >
@@ -91,7 +90,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button asChild variant="primary" size="sm" className="hidden sm:inline-flex">
+          <Button asChild variant="primary" size="sm" className="hidden rounded-none px-4 text-xs uppercase tracking-[.12em] sm:inline-flex">
             <Link href="/contact">Work With Us</Link>
           </Button>
           <MobileNav />
@@ -106,10 +105,10 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute inset-x-0 top-16 hidden lg:block"
+            className="absolute inset-x-0 top-[72px] hidden lg:block"
           >
-            <div className="mx-auto max-w-[1280px] px-6 md:px-8">
-              <div className="bg-background overflow-hidden rounded-2xl border border-border/50 shadow-lg">
+            <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
+              <div className="overflow-hidden border border-white/[.16] bg-[#111] shadow-2xl">
                 <MegaMenu type={openMenu} />
               </div>
             </div>

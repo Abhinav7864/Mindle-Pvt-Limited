@@ -19,20 +19,21 @@ export function FinalCTA({
   secondaryHref?: string;
 }) {
   return (
-    <section className="py-8 sm:py-14 md:py-20">
-      <div className="mx-auto w-full max-w-[1280px] px-6 md:px-8">
+    <section className="bg-[#080808] py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10 lg:px-16">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-surface-2 px-6 py-10 text-center md:px-16 md:py-24">
-            <div className="absolute inset-0 bg-grid opacity-30" />
+          <div className="relative overflow-hidden border-y border-white/[.14] py-16 text-center md:py-28">
+            <div className="noise-overlay absolute inset-0" />
             <div className="relative">
-              <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold tracking-tight text-balance sm:text-4xl md:text-5xl">
+              <p className="font-mono text-[10px] uppercase tracking-[.24em] text-white/45">A good place to start</p>
+              <h2 className="mx-auto mt-6 max-w-4xl font-display text-[clamp(3rem,6vw,6.7rem)] font-semibold leading-[.9] tracking-[-.07em] text-balance">
                 {title}
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              <p className="mx-auto mt-7 max-w-xl text-base leading-7 text-white/55 sm:text-lg sm:leading-8">
                 {description}
               </p>
               <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-                <Button asChild variant="primary" size="lg">
+                <Button asChild variant="primary" size="lg" className="rounded-none">
                   <Link
                     href={primaryHref}
                     target={primaryHref.startsWith("http") ? "_blank" : undefined}
@@ -41,7 +42,7 @@ export function FinalCTA({
                     {primaryLabel} <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="outline" size="lg" className="rounded-none border-white/30 hover:bg-white hover:text-black">
                   <Link href={secondaryHref}>{secondaryLabel}</Link>
                 </Button>
               </div>

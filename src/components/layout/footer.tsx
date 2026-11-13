@@ -16,8 +16,8 @@ const socials = [
 export function Footer() {
   const year = 2026;
   return (
-    <footer className="relative mt-24 border-t border-border bg-[var(--surface-1)]">
-      <div className="mx-auto w-full max-w-[1280px] px-6 py-16 md:px-8">
+    <footer className="relative border-t border-white/[.12] bg-[#080808]">
+      <div className="mx-auto w-full max-w-[1440px] px-6 py-16 md:px-10 lg:px-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo />
@@ -25,9 +25,9 @@ export function Footer() {
               {siteConfig.description}
             </p>
             <div className="mt-6">
-              <p className="text-sm font-medium">Join the newsletter</p>
+              <p className="text-sm font-medium">Stay close</p>
               <p className="mb-3 text-sm text-muted-foreground">
-                Product updates and engineering notes. No spam.
+                Occasional product updates and studio notes.
               </p>
               <NewsletterForm className="max-w-sm" />
             </div>
@@ -36,7 +36,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:col-span-8">
             {footerNav.map((col) => (
               <div key={col.title}>
-                <h3 className="text-sm font-semibold">{col.title}</h3>
+                <h3 className="font-mono text-[10px] font-medium uppercase tracking-[.18em] text-white/45">{col.title}</h3>
                 <ul className="mt-4 space-y-3">
                   {col.links.map((link) => (
                     <li key={link.href}>
@@ -66,7 +66,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
+                className="grid h-9 w-9 place-items-center border border-white/[.16] text-muted-foreground transition-colors hover:border-white hover:text-foreground"
               >
                 <s.icon className="h-4 w-4" />
               </a>

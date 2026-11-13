@@ -1,162 +1,99 @@
 "use client";
 
-import React, { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Sparkles,
-  Layers,
-  Smartphone,
-  Globe2,
-  Cpu,
-  Copy,
-  Check,
-  Play,
-} from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { KineticText } from "@/components/ui/kinetic-text";
-import { Tilt3D } from "@/components/ui/tilt-3d";
-import { StudioRuntimeConsole } from "@/components/sections/studio-runtime-console";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i: number) => ({
+const reveal = {
+  hidden: { opacity: 0, y: 26 },
+  visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: 0.1 + i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay, duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
-export function Hero() {
-  const [copied, setCopied] = useState(false);
-  const cliCommand = "npx mindle@latest create-app";
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(cliCommand);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+/** The site signature: a product form emerging from a web of possibility. */
+function ProductForm() {
+  const reduceMotion = useReducedMotion();
+  const duration = reduceMotion ? 0 : 10;
 
   return (
-    <section className="relative overflow-hidden pb-14 pt-24 sm:pb-20 sm:pt-32 md:pb-24 md:pt-36">
-      {/* Dynamic Glow Mesh Backdrops (Mindle Royal Blue & Cyan) */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[550px] w-full max-w-[1250px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top_left,rgba(0,102,255,0.25),transparent_50%),radial-gradient(ellipse_at_top_right,rgba(0,210,255,0.2),transparent_50%)] opacity-80 blur-3xl" />
-      <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)] opacity-40" />
+    <div className="relative mx-auto aspect-square w-full max-w-[570px]">
+      <div className="absolute inset-[9%] rounded-full border border-white/[.12]" />
+      <div className="absolute inset-[22%] rounded-full border border-white/[.1]" />
+      <div className="absolute inset-[36%] rounded-full border border-white/[.08]" />
+      <motion.div
+        className="absolute inset-[8%] rounded-full border border-dashed border-white/[.16]"
+        animate={reduceMotion ? undefined : { rotate: 360 }}
+        transition={{ duration: 36, ease: "linear", repeat: Infinity }}
+      />
+      <motion.svg viewBox="0 0 560 560" className="absolute inset-0 h-full w-full overflow-visible" aria-label="An abstract network evolving into a product form" role="img">
+        <defs>
+          <filter id="mindle-soften"><feGaussianBlur stdDeviation="1.1" /></filter>
+          <radialGradient id="mindle-core"><stop stopColor="#fff" stopOpacity=".85"/><stop offset=".42" stopColor="#bfbfba" stopOpacity=".18"/><stop offset="1" stopColor="#fff" stopOpacity="0"/></radialGradient>
+        </defs>
+        <motion.path
+          d="M76 312 C111 147 268 70 423 130 C544 177 531 397 387 456 C253 511 95 441 76 312Z"
+          fill="none"
+          stroke="rgba(255,255,255,.5)"
+          strokeWidth="1.2"
+          strokeDasharray="4 8"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 1.6, delay: .4, ease: "easeInOut" }}
+        />
+        <motion.path
+          d="M144 272 C191 147 343 154 408 248 C468 335 387 428 279 406 C163 383 114 322 144 272Z"
+          fill="none"
+          stroke="rgba(255,255,255,.76)"
+          strokeWidth="1.4"
+          animate={reduceMotion ? undefined : { d: ["M144 272 C191 147 343 154 408 248 C468 335 387 428 279 406 C163 383 114 322 144 272Z", "M125 291 C171 155 353 133 426 242 C480 326 372 443 267 419 C143 392 101 329 125 291Z", "M144 272 C191 147 343 154 408 248 C468 335 387 428 279 406 C163 383 114 322 144 272Z"] }}
+          transition={{ duration, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.circle cx="280" cy="280" r="130" fill="url(#mindle-core)" initial={{ scale: .6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.2, delay: .25 }} />
+        {[[102,274],[184,165],[355,159],[454,263],[390,406],[216,418],[280,280]].map(([cx, cy], index) => (
+          <motion.circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index === 6 ? 6 : 3.5} fill="#f5f5f3" filter="url(#mindle-soften)" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .5 + index * .1 }} />
+        ))}
+        <motion.path d="M102 274 L184 165 L280 280 L355 159 L454 263 L390 406 L280 280 L216 418 L102 274" fill="none" stroke="rgba(255,255,255,.28)" strokeWidth="1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.05 }} />
+      </motion.svg>
+      <div className="absolute inset-[40%] rounded-full border border-white/20 bg-white/[.04] shadow-[0_0_100px_30px_rgba(255,255,255,.08)]" />
+      <div className="absolute bottom-[8%] left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[9px] uppercase tracking-[.32em] text-white/35">idea / form / impact</div>
+    </div>
+  );
+}
 
-      <div className="mx-auto grid w-full max-w-[1280px] items-center gap-12 px-6 md:px-8 lg:grid-cols-[1.08fr_0.92fr]">
-        <div>
-          {/* Top Pill */}
-          <motion.div
-            variants={fadeUp}
-            custom={0}
-            initial="hidden"
-            animate="visible"
-            className="inline-flex items-center gap-2 rounded-full border border-[#00D2FF]/35 bg-[#0066FF]/15 px-3.5 py-1 text-xs font-semibold text-[#00D2FF] shadow-sm"
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Product Studio · SaaS Engineering · AI Lab</span>
-          </motion.div>
-
-          <motion.h1
-            variants={fadeUp}
-            custom={1}
-            initial="hidden"
-            animate="visible"
-            className="mt-4 font-display text-[2.25rem] font-extrabold leading-[1.08] tracking-tight text-balance sm:text-5xl md:text-[4.25rem]"
-          >
-            We build products, SaaS &amp; apps{" "}
-            <br className="hidden sm:inline" />
-            <KineticText
-              phrases={[
-                "that shape the future.",
-                "built to scale effortlessly.",
-                "with intelligent AI.",
-                "that users genuinely love.",
-              ]}
-            />
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            custom={2}
-            initial="hidden"
-            animate="visible"
-            className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-          >
-            Mindle is a product-first engineering company. We architect high-performance
-            multi-tenant SaaS platforms, modern web applications, native mobile apps, and
-            domain-locked AI systems—building our own venture portfolio and engineering
-            flagship software with ambitious partners.
+export function Hero() {
+  return (
+    <section className="relative isolate min-h-[min(900px,100svh)] overflow-hidden pt-24">
+      <div className="noise-overlay pointer-events-none absolute inset-0" />
+      <div className="pointer-events-none absolute inset-x-0 top-[42%] h-px bg-white/[.08]" />
+      <div className="mx-auto grid min-h-[calc(min(900px,100svh)-6rem)] max-w-[1440px] items-center gap-8 px-6 pb-14 md:px-10 lg:grid-cols-[1.03fr_.97fr] lg:px-16">
+        <div className="relative z-10 pt-16 lg:pt-8">
+          <motion.p variants={reveal} custom={.14} initial="hidden" animate="visible" className="font-mono text-[10px] uppercase tracking-[.24em] text-white/45">
+            AI product studio · India / Everywhere
           </motion.p>
-
-          {/* Action Buttons & Quick CLI Copy */}
-          <motion.div
-            variants={fadeUp}
-            custom={3}
-            initial="hidden"
-            animate="visible"
-            className="mt-8 flex flex-wrap items-center gap-4"
-          >
-            <Button asChild variant="primary" size="lg" className="shadow-lg shadow-accent/20">
-              <Link href="#studio-showreel">
-                <Play className="h-4 w-4 fill-current mr-1" />
-                Watch What We Build
-              </Link>
+          <motion.h1 variants={reveal} custom={.23} initial="hidden" animate="visible" className="mt-7 max-w-4xl font-display text-[clamp(3.5rem,7.1vw,7.35rem)] font-semibold leading-[.9] tracking-[-.075em] text-white">
+            Ideas deserve to become <span className="text-white/42">extraordinary</span> products.
+          </motion.h1>
+          <motion.p variants={reveal} custom={.36} initial="hidden" animate="visible" className="mt-8 max-w-md text-base leading-7 text-white/56 md:text-lg md:leading-8">
+            Mindle turns ambitious ideas into intelligent experiences: products that are useful, considered, and built to last.
+          </motion.p>
+          <motion.div variants={reveal} custom={.48} initial="hidden" animate="visible" className="mt-10 flex flex-wrap items-center gap-3">
+            <Button asChild variant="primary" size="lg" className="rounded-none px-6 font-medium">
+              <Link href="/contact">Start a conversation <ArrowUpRight className="h-4 w-4" /></Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/contact">Work With Us</Link>
-            </Button>
-
-            {/* Tesser-inspired CLI copy pill */}
-            <div className="flex items-center gap-2 rounded-xl border border-border bg-card/80 px-3 py-2 text-xs font-mono backdrop-blur-md shadow-sm">
-              <span className="text-muted-foreground select-none">$</span>
-              <span className="text-foreground">{cliCommand}</span>
-              <button
-                onClick={handleCopy}
-                className="ml-1 rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                title="Copy CLI command"
-              >
-                {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
-              </button>
-            </div>
-          </motion.div>
-
-          {/* Capability Badges Strip */}
-          <motion.div
-            variants={fadeUp}
-            custom={4}
-            initial="hidden"
-            animate="visible"
-            className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted-foreground sm:text-sm pt-4 border-t border-border/50"
-          >
-            <span className="flex items-center gap-1.5 font-medium text-foreground">
-              <Layers className="h-4 w-4 text-amber-500 shrink-0" /> Multi-Tenant SaaS
-            </span>
-            <span className="flex items-center gap-1.5 font-medium text-foreground">
-              <Globe2 className="h-4 w-4 text-blue-500 shrink-0" /> Full-Stack Web Apps
-            </span>
-            <span className="flex items-center gap-1.5 font-medium text-foreground">
-              <Smartphone className="h-4 w-4 text-emerald-500 shrink-0" /> Native Mobile
-            </span>
-            <span className="flex items-center gap-1.5 font-medium text-foreground">
-              <Cpu className="h-4 w-4 text-purple-400 shrink-0" /> Grounded AI
-            </span>
+            <Link href="#work" className="magnetic-link inline-flex items-center gap-2 px-3 py-3 text-sm text-white/70 hover:text-white">
+              Explore our work <ArrowDownRight className="h-4 w-4" />
+            </Link>
           </motion.div>
         </div>
-
-        {/* Right Visual: Tesser-Inspired Studio Runtime Console */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto hidden lg:block w-full"
-        >
-          <Tilt3D maxTilt={10} className="w-full">
-            <StudioRuntimeConsole />
-          </Tilt3D>
+        <motion.div initial={{ opacity: 0, scale: .94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, delay: .15, ease: [0.22, 1, 0.36, 1] }} className="relative lg:-mr-10">
+          <ProductForm />
         </motion.div>
       </div>
+      <div className="absolute bottom-6 left-6 flex items-center gap-3 font-mono text-[9px] uppercase tracking-[.2em] text-white/35 md:left-10 lg:left-16"><span className="h-px w-9 bg-white/30" /> Scroll to enter</div>
     </section>
   );
 }
